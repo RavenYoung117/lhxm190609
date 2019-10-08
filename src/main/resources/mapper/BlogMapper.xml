@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.dao.BlogMapper">
+  <resultMap id="BaseResultMap" type="com.qf.entity.Blog">
+    <id column="bolg_id" jdbcType="BIGINT" property="bolgId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="image_url" jdbcType="VARCHAR" property="imageUrl" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="cimage" jdbcType="VARCHAR" property="cimage" />
+    <result column="reply" jdbcType="BIGINT" property="reply" />
+    <result column="collect" jdbcType="BIGINT" property="collect" />
+    <result column="like" jdbcType="BIGINT" property="like" />
+    <result column="pub_date" jdbcType="DATE" property="pubDate" />
+    <result column="edit_date" jdbcType="DATE" property="editDate" />
+    <result column="bolgstate" jdbcType="BIGINT" property="bolgstate" />
+    <result column="t_id" jdbcType="BIGINT" property="tId" />
+    <result column="u_id" jdbcType="BIGINT" property="uId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    bolg_id, title, image_url, content, cimage, reply, collect, like, pub_date, edit_date, 
+    bolgstate, t_id, u_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from blog
+    where bolg_id = #{bolgId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from blog
+    where bolg_id = #{bolgId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.qf.entity.Blog">
+    insert into blog (bolg_id, title, image_url, 
+      content, cimage, reply, 
+      collect, like, pub_date, 
+      edit_date, bolgstate, t_id, 
+      u_id)
+    values (#{bolgId,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{imageUrl,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{cimage,jdbcType=VARCHAR}, #{reply,jdbcType=BIGINT}, 
+      #{collect,jdbcType=BIGINT}, #{like,jdbcType=BIGINT}, #{pubDate,jdbcType=DATE}, 
+      #{editDate,jdbcType=DATE}, #{bolgstate,jdbcType=BIGINT}, #{tId,jdbcType=BIGINT}, 
+      #{uId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qf.entity.Blog">
+    insert into blog
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bolgId != null">
+        bolg_id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="imageUrl != null">
+        image_url,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="cimage != null">
+        cimage,
+      </if>
+      <if test="reply != null">
+        reply,
+      </if>
+      <if test="collect != null">
+        collect,
+      </if>
+      <if test="like != null">
+        like,
+      </if>
+      <if test="pubDate != null">
+        pub_date,
+      </if>
+      <if test="editDate != null">
+        edit_date,
+      </if>
+      <if test="bolgstate != null">
+        bolgstate,
+      </if>
+      <if test="tId != null">
+        t_id,
+      </if>
+      <if test="uId != null">
+        u_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bolgId != null">
+        #{bolgId,jdbcType=BIGINT},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null">
+        #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="cimage != null">
+        #{cimage,jdbcType=VARCHAR},
+      </if>
+      <if test="reply != null">
+        #{reply,jdbcType=BIGINT},
+      </if>
+      <if test="collect != null">
+        #{collect,jdbcType=BIGINT},
+      </if>
+      <if test="like != null">
+        #{like,jdbcType=BIGINT},
+      </if>
+      <if test="pubDate != null">
+        #{pubDate,jdbcType=DATE},
+      </if>
+      <if test="editDate != null">
+        #{editDate,jdbcType=DATE},
+      </if>
+      <if test="bolgstate != null">
+        #{bolgstate,jdbcType=BIGINT},
+      </if>
+      <if test="tId != null">
+        #{tId,jdbcType=BIGINT},
+      </if>
+      <if test="uId != null">
+        #{uId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qf.entity.Blog">
+    update blog
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null">
+        image_url = #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="cimage != null">
+        cimage = #{cimage,jdbcType=VARCHAR},
+      </if>
+      <if test="reply != null">
+        reply = #{reply,jdbcType=BIGINT},
+      </if>
+      <if test="collect != null">
+        collect = #{collect,jdbcType=BIGINT},
+      </if>
+      <if test="like != null">
+        like = #{like,jdbcType=BIGINT},
+      </if>
+      <if test="pubDate != null">
+        pub_date = #{pubDate,jdbcType=DATE},
+      </if>
+      <if test="editDate != null">
+        edit_date = #{editDate,jdbcType=DATE},
+      </if>
+      <if test="bolgstate != null">
+        bolgstate = #{bolgstate,jdbcType=BIGINT},
+      </if>
+      <if test="tId != null">
+        t_id = #{tId,jdbcType=BIGINT},
+      </if>
+      <if test="uId != null">
+        u_id = #{uId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where bolg_id = #{bolgId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qf.entity.Blog">
+    update blog
+    set title = #{title,jdbcType=VARCHAR},
+      image_url = #{imageUrl,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      cimage = #{cimage,jdbcType=VARCHAR},
+      reply = #{reply,jdbcType=BIGINT},
+      collect = #{collect,jdbcType=BIGINT},
+      like = #{like,jdbcType=BIGINT},
+      pub_date = #{pubDate,jdbcType=DATE},
+      edit_date = #{editDate,jdbcType=DATE},
+      bolgstate = #{bolgstate,jdbcType=BIGINT},
+      t_id = #{tId,jdbcType=BIGINT},
+      u_id = #{uId,jdbcType=BIGINT}
+    where bolg_id = #{bolgId,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.qf.entity.Blog">
+    <id column="bolg_id" jdbcType="BIGINT" property="bolgId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="image_url" jdbcType="VARCHAR" property="imageUrl" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="cimage" jdbcType="VARCHAR" property="cimage" />
+    <result column="reply" jdbcType="BIGINT" property="reply" />
+    <result column="collect" jdbcType="BIGINT" property="collect" />
+    <result column="like" jdbcType="BIGINT" property="like" />
+    <result column="pub_date" jdbcType="DATE" property="pubDate" />
+    <result column="edit_date" jdbcType="DATE" property="editDate" />
+    <result column="bolgstate" jdbcType="BIGINT" property="bolgstate" />
+    <result column="t_id" jdbcType="BIGINT" property="tId" />
+    <result column="u_id" jdbcType="BIGINT" property="uId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    bolg_id, title, image_url, content, cimage, reply, collect, like, pub_date, edit_date, 
+    bolgstate, t_id, u_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from blog
+    where bolg_id = #{bolgId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from blog
+    where bolg_id = #{bolgId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.qf.entity.Blog">
+    insert into blog (bolg_id, title, image_url, 
+      content, cimage, reply, 
+      collect, like, pub_date, 
+      edit_date, bolgstate, t_id, 
+      u_id)
+    values (#{bolgId,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{imageUrl,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{cimage,jdbcType=VARCHAR}, #{reply,jdbcType=BIGINT}, 
+      #{collect,jdbcType=BIGINT}, #{like,jdbcType=BIGINT}, #{pubDate,jdbcType=DATE}, 
+      #{editDate,jdbcType=DATE}, #{bolgstate,jdbcType=BIGINT}, #{tId,jdbcType=BIGINT}, 
+      #{uId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qf.entity.Blog">
+    insert into blog
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bolgId != null">
+        bolg_id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="imageUrl != null">
+        image_url,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="cimage != null">
+        cimage,
+      </if>
+      <if test="reply != null">
+        reply,
+      </if>
+      <if test="collect != null">
+        collect,
+      </if>
+      <if test="like != null">
+        like,
+      </if>
+      <if test="pubDate != null">
+        pub_date,
+      </if>
+      <if test="editDate != null">
+        edit_date,
+      </if>
+      <if test="bolgstate != null">
+        bolgstate,
+      </if>
+      <if test="tId != null">
+        t_id,
+      </if>
+      <if test="uId != null">
+        u_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bolgId != null">
+        #{bolgId,jdbcType=BIGINT},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null">
+        #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="cimage != null">
+        #{cimage,jdbcType=VARCHAR},
+      </if>
+      <if test="reply != null">
+        #{reply,jdbcType=BIGINT},
+      </if>
+      <if test="collect != null">
+        #{collect,jdbcType=BIGINT},
+      </if>
+      <if test="like != null">
+        #{like,jdbcType=BIGINT},
+      </if>
+      <if test="pubDate != null">
+        #{pubDate,jdbcType=DATE},
+      </if>
+      <if test="editDate != null">
+        #{editDate,jdbcType=DATE},
+      </if>
+      <if test="bolgstate != null">
+        #{bolgstate,jdbcType=BIGINT},
+      </if>
+      <if test="tId != null">
+        #{tId,jdbcType=BIGINT},
+      </if>
+      <if test="uId != null">
+        #{uId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qf.entity.Blog">
+    update blog
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null">
+        image_url = #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="cimage != null">
+        cimage = #{cimage,jdbcType=VARCHAR},
+      </if>
+      <if test="reply != null">
+        reply = #{reply,jdbcType=BIGINT},
+      </if>
+      <if test="collect != null">
+        collect = #{collect,jdbcType=BIGINT},
+      </if>
+      <if test="like != null">
+        like = #{like,jdbcType=BIGINT},
+      </if>
+      <if test="pubDate != null">
+        pub_date = #{pubDate,jdbcType=DATE},
+      </if>
+      <if test="editDate != null">
+        edit_date = #{editDate,jdbcType=DATE},
+      </if>
+      <if test="bolgstate != null">
+        bolgstate = #{bolgstate,jdbcType=BIGINT},
+      </if>
+      <if test="tId != null">
+        t_id = #{tId,jdbcType=BIGINT},
+      </if>
+      <if test="uId != null">
+        u_id = #{uId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where bolg_id = #{bolgId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qf.entity.Blog">
+    update blog
+    set title = #{title,jdbcType=VARCHAR},
+      image_url = #{imageUrl,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      cimage = #{cimage,jdbcType=VARCHAR},
+      reply = #{reply,jdbcType=BIGINT},
+      collect = #{collect,jdbcType=BIGINT},
+      like = #{like,jdbcType=BIGINT},
+      pub_date = #{pubDate,jdbcType=DATE},
+      edit_date = #{editDate,jdbcType=DATE},
+      bolgstate = #{bolgstate,jdbcType=BIGINT},
+      t_id = #{tId,jdbcType=BIGINT},
+      u_id = #{uId,jdbcType=BIGINT}
+    where bolg_id = #{bolgId,jdbcType=BIGINT}
+  </update>
+</mapper>

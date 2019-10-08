@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.dao.AnswertopicMapper">
+  <resultMap id="BaseResultMap" type="com.qf.entity.Answertopic">
+    <id column="answer_id" jdbcType="BIGINT" property="answerId" />
+    <result column="t_id" jdbcType="BIGINT" property="tId" />
+    <result column="u_id" jdbcType="BIGINT" property="uId" />
+    <result column="like" jdbcType="BIGINT" property="like" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="time" jdbcType="DATE" property="time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    answer_id, t_id, u_id, like, content, time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from answertopic
+    where answer_id = #{answerId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from answertopic
+    where answer_id = #{answerId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.qf.entity.Answertopic">
+    insert into answertopic (answer_id, t_id, u_id, 
+      like, content, time)
+    values (#{answerId,jdbcType=BIGINT}, #{tId,jdbcType=BIGINT}, #{uId,jdbcType=BIGINT}, 
+      #{like,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, #{time,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qf.entity.Answertopic">
+    insert into answertopic
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="answerId != null">
+        answer_id,
+      </if>
+      <if test="tId != null">
+        t_id,
+      </if>
+      <if test="uId != null">
+        u_id,
+      </if>
+      <if test="like != null">
+        like,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="answerId != null">
+        #{answerId,jdbcType=BIGINT},
+      </if>
+      <if test="tId != null">
+        #{tId,jdbcType=BIGINT},
+      </if>
+      <if test="uId != null">
+        #{uId,jdbcType=BIGINT},
+      </if>
+      <if test="like != null">
+        #{like,jdbcType=BIGINT},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qf.entity.Answertopic">
+    update answertopic
+    <set>
+      <if test="tId != null">
+        t_id = #{tId,jdbcType=BIGINT},
+      </if>
+      <if test="uId != null">
+        u_id = #{uId,jdbcType=BIGINT},
+      </if>
+      <if test="like != null">
+        like = #{like,jdbcType=BIGINT},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=DATE},
+      </if>
+    </set>
+    where answer_id = #{answerId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qf.entity.Answertopic">
+    update answertopic
+    set t_id = #{tId,jdbcType=BIGINT},
+      u_id = #{uId,jdbcType=BIGINT},
+      like = #{like,jdbcType=BIGINT},
+      content = #{content,jdbcType=VARCHAR},
+      time = #{time,jdbcType=DATE}
+    where answer_id = #{answerId,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.qf.entity.Answertopic">
+    <id column="answer_id" jdbcType="BIGINT" property="answerId" />
+    <result column="t_id" jdbcType="BIGINT" property="tId" />
+    <result column="u_id" jdbcType="BIGINT" property="uId" />
+    <result column="like" jdbcType="BIGINT" property="like" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="time" jdbcType="DATE" property="time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    answer_id, t_id, u_id, like, content, time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from answertopic
+    where answer_id = #{answerId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from answertopic
+    where answer_id = #{answerId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.qf.entity.Answertopic">
+    insert into answertopic (answer_id, t_id, u_id, 
+      like, content, time)
+    values (#{answerId,jdbcType=BIGINT}, #{tId,jdbcType=BIGINT}, #{uId,jdbcType=BIGINT}, 
+      #{like,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, #{time,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qf.entity.Answertopic">
+    insert into answertopic
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="answerId != null">
+        answer_id,
+      </if>
+      <if test="tId != null">
+        t_id,
+      </if>
+      <if test="uId != null">
+        u_id,
+      </if>
+      <if test="like != null">
+        like,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="answerId != null">
+        #{answerId,jdbcType=BIGINT},
+      </if>
+      <if test="tId != null">
+        #{tId,jdbcType=BIGINT},
+      </if>
+      <if test="uId != null">
+        #{uId,jdbcType=BIGINT},
+      </if>
+      <if test="like != null">
+        #{like,jdbcType=BIGINT},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qf.entity.Answertopic">
+    update answertopic
+    <set>
+      <if test="tId != null">
+        t_id = #{tId,jdbcType=BIGINT},
+      </if>
+      <if test="uId != null">
+        u_id = #{uId,jdbcType=BIGINT},
+      </if>
+      <if test="like != null">
+        like = #{like,jdbcType=BIGINT},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=DATE},
+      </if>
+    </set>
+    where answer_id = #{answerId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qf.entity.Answertopic">
+    update answertopic
+    set t_id = #{tId,jdbcType=BIGINT},
+      u_id = #{uId,jdbcType=BIGINT},
+      like = #{like,jdbcType=BIGINT},
+      content = #{content,jdbcType=VARCHAR},
+      time = #{time,jdbcType=DATE}
+    where answer_id = #{answerId,jdbcType=BIGINT}
+  </update>
+</mapper>
