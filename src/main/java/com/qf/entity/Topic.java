@@ -7,6 +7,8 @@ public class Topic {
 
     private String type;
 
+    private String title;
+
     private String tImage;
 
     private Long answer;
@@ -33,6 +35,14 @@ public class Topic {
 
     public void setType(String type) {
         this.type = type == null ? null : type.trim();
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title == null ? null : title.trim();
     }
 
     public String gettImage() {

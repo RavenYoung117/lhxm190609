@@ -2,6 +2,8 @@ package com.qf.dao;
 
 import com.qf.entity.Topic;
 
+import java.util.List;
+
 public interface TopicMapper {
     int deleteByPrimaryKey(Long tId);
 
@@ -14,4 +16,6 @@ public interface TopicMapper {
     int updateByPrimaryKeySelective(Topic record);
 
     int updateByPrimaryKey(Topic record);
+
+    List<Topic> findByTitle(String topicWords);
 }
