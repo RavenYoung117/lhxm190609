@@ -18,4 +18,10 @@ public interface TopicMapper {
     int updateByPrimaryKey(Topic record);
 
     List<Topic> findByTitle(String topicWords);
+
+    List<String> findType();
+
+    List<Topic> findAllByType(String type);
+
+    List<Topic> findByAnswer();
 }

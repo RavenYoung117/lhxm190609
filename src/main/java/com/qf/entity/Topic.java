@@ -1,6 +1,7 @@
 package com.qf.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class Topic {
     private Long tId;
@@ -20,6 +21,16 @@ public class Topic {
     private String cimage;
 
     private Date tTime;
+
+    private List<Answertopic> answertopicList;
+
+    public List<Answertopic> getAnswertopicList() {
+        return answertopicList;
+    }
+
+    public void setAnswertopicList(List<Answertopic> answertopicList) {
+        this.answertopicList = answertopicList;
+    }
 
     public Long gettId() {
         return tId;

@@ -21,4 +21,24 @@ public class TopicServiceImpl implements TopicService{
     public List<Topic> findByTitle(String topicWords) {
         return topicMapper.findByTitle(topicWords);
     }
+
+    @Override
+    public List<String> findType() {
+        return topicMapper.findType();
+    }
+
+    @Override
+    public List<Topic> findAllByType(String type) {
+        return topicMapper.findAllByType(type);
+    }
+
+    @Override
+    public Topic findById(long tid) {
+        return topicMapper.selectByPrimaryKey(tid);
+    }
+
+    @Override
+    public List<Topic> findByAnswer() {
+        return topicMapper.findByAnswer();
+    }
 }

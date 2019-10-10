@@ -11,12 +11,34 @@
     <result column="u_id" jdbcType="BIGINT" property="uId" />
     <result column="cimage" jdbcType="VARCHAR" property="cimage" />
     <result column="t_time" jdbcType="DATE" property="tTime" />
+    <collection property="answertopicList" ofType="com.qf.entity.Answertopic">
+      <id column="answer_id" jdbcType="BIGINT" property="answerId" />
+      <result column="t_id" jdbcType="BIGINT" property="tId" />
+      <result column="u_id" jdbcType="BIGINT" property="uId" />
+      <result column="like" jdbcType="BIGINT" property="like" />
+      <result column="content" jdbcType="VARCHAR" property="content" />
+      <result column="time" jdbcType="DATE" property="time" />
+    </collection>
   </resultMap>
   
   <select id="findByTitle" resultMap="BaseResultMap">
     SELECT * from topic where title like "%"#{topicWords}"%"
   </select>
-  
+
+  <select id="findType" resultType="String">
+    SELECT type from topic GROUP BY type
+  </select>
+
+  <select id="findAllByType" resultMap="BaseResultMap">
+    SELECT * from topic where type=#{type}
+  </select>
+
+  <select id="findByAnswer" resultMap="BaseResultMap">
+    SELECT * from topic ORDER BY answer DESC
+  </select>
+
+
+
   <sql id="Base_Column_List">
     t_id, type, title, t_image, answer, contents, u_id, cimage, t_time
   </sql>

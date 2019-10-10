@@ -14,4 +14,11 @@ public interface TopicService {
 
     List<Topic> findByTitle(String topicWords);
 
+    List<String> findType();
+
+    List<Topic> findAllByType(String type);
+
+    Topic findById(long tid);
+
+    List<Topic> findByAnswer();
 }
