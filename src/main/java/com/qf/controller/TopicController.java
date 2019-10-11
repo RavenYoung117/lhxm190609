@@ -1,6 +1,8 @@
 package com.qf.controller;
 
+import com.qf.entity.Answertopic;
 import com.qf.entity.Topic;
+import com.qf.service.AnswerService;
 import com.qf.service.TopicService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,9 @@ import java.util.Map;
 public class TopicController {
     @Resource
     private TopicService topicService;
+
+    @Resource
+    private AnswerService answerService;
 
     //模糊查询话题
     @RequestMapping("/findTopic")
@@ -47,8 +52,22 @@ public class TopicController {
     }
     //话题全查:根据话题id返回话题具体内容
     @RequestMapping("/findById")
-    public Topic findById(long tid){
+    public Map findById(long tid){
         Topic topic=topicService.findById(tid);
-        return topic;
+        List<Answertopic> answertopics = answerService.findByTid(tid);
+        Map map=new HashMap();
+        map.put("topic",topic);
+        map.put("answertopics",answertopics);
+        return map;
+    }
+    //话题评论
+    @RequestMapping("/insertAnswer")
+    public boolean insertAnswer(Answertopic answertopic){
+        boolean message=false;
+        int i=answerService.insertAnswer(answertopic);
+        if (i>0){
+            message=true;
+        }
+        return message;
     }
 }

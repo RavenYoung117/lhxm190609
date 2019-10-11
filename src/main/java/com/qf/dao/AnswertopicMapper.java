@@ -2,6 +2,8 @@ package com.qf.dao;
 
 import com.qf.entity.Answertopic;
 
+import java.util.List;
+
 public interface AnswertopicMapper {
     int deleteByPrimaryKey(Long answerId);
 
@@ -14,4 +16,6 @@ public interface AnswertopicMapper {
     int updateByPrimaryKeySelective(Answertopic record);
 
     int updateByPrimaryKey(Answertopic record);
+
+    List<Answertopic> findByTid(long tid);
 }

@@ -11,16 +11,8 @@
     <result column="u_id" jdbcType="BIGINT" property="uId" />
     <result column="cimage" jdbcType="VARCHAR" property="cimage" />
     <result column="t_time" jdbcType="DATE" property="tTime" />
-    <collection property="answertopicList" ofType="com.qf.entity.Answertopic">
-      <id column="answer_id" jdbcType="BIGINT" property="answerId" />
-      <result column="t_id" jdbcType="BIGINT" property="tId" />
-      <result column="u_id" jdbcType="BIGINT" property="uId" />
-      <result column="like" jdbcType="BIGINT" property="like" />
-      <result column="content" jdbcType="VARCHAR" property="content" />
-      <result column="time" jdbcType="DATE" property="time" />
-    </collection>
   </resultMap>
-  
+
   <select id="findByTitle" resultMap="BaseResultMap">
     SELECT * from topic where title like "%"#{topicWords}"%"
   </select>
@@ -40,7 +32,7 @@
 
 
   <sql id="Base_Column_List">
-    t_id, type, title, t_image, answer, contents, u_id, cimage, t_time
+    t_id, `type`, title, t_image, answer, contents, u_id, cimage, t_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -53,7 +45,7 @@
     where t_id = #{tId,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.qf.entity.Topic">
-    insert into topic (t_id, type, title, 
+    insert into topic (t_id, `type`, title,
       t_image, answer, contents, 
       u_id, cimage, t_time)
     values (#{tId,jdbcType=BIGINT}, #{type,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
@@ -67,7 +59,7 @@
         t_id,
       </if>
       <if test="type != null">
-        type,
+        `type`,
       </if>
       <if test="title != null">
         title,
@@ -125,7 +117,7 @@
     update topic
     <set>
       <if test="type != null">
-        type = #{type,jdbcType=VARCHAR},
+        `type` = #{type,jdbcType=VARCHAR},
       </if>
       <if test="title != null">
         title = #{title,jdbcType=VARCHAR},

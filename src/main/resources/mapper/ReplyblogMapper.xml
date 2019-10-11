@@ -10,7 +10,7 @@
     <result column="r_time" jdbcType="DATE" property="rTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    r_id, blog_id, u_id, like, content, r_time
+    r_id, blog_id, u_id, `like`, content, r_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -24,7 +24,7 @@
   </delete>
   <insert id="insert" parameterType="com.qf.entity.Replyblog">
     insert into replyblog (r_id, blog_id, u_id, 
-      like, content, r_time)
+      `like`, content, r_time)
     values (#{rId,jdbcType=BIGINT}, #{blogId,jdbcType=BIGINT}, #{uId,jdbcType=BIGINT}, 
       #{like,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, #{rTime,jdbcType=DATE})
   </insert>
@@ -41,7 +41,7 @@
         u_id,
       </if>
       <if test="like != null">
-        like,
+        `like`,
       </if>
       <if test="content != null">
         content,
@@ -81,7 +81,7 @@
         u_id = #{uId,jdbcType=BIGINT},
       </if>
       <if test="like != null">
-        like = #{like,jdbcType=BIGINT},
+        `like` = #{like,jdbcType=BIGINT},
       </if>
       <if test="content != null">
         content = #{content,jdbcType=VARCHAR},
@@ -96,7 +96,7 @@
     update replyblog
     set blog_id = #{blogId,jdbcType=BIGINT},
       u_id = #{uId,jdbcType=BIGINT},
-      like = #{like,jdbcType=BIGINT},
+      `like` = #{like,jdbcType=BIGINT},
       content = #{content,jdbcType=VARCHAR},
       r_time = #{rTime,jdbcType=DATE}
     where r_id = #{rId,jdbcType=BIGINT}

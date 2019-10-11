@@ -8,10 +8,22 @@
     <result column="like" jdbcType="BIGINT" property="like" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="time" jdbcType="DATE" property="time" />
+    <association property="users" javaType="com.qf.entity.Users">
+      <id column="u_id" jdbcType="BIGINT" property="uId" />
+      <result column="uname" jdbcType="VARCHAR" property="uname" />
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
-    answer_id, t_id, u_id, like, content, time
+    answer_id, t_id, u_id, `like`, content, `time`
   </sql>
+
+  <select id="findByTid" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    a.*,u.uname
+    from answertopic a,users u
+    where a.u_id=u.u_id and t_id=#{tid}
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -22,12 +34,14 @@
     delete from answertopic
     where answer_id = #{answerId,jdbcType=BIGINT}
   </delete>
+
   <insert id="insert" parameterType="com.qf.entity.Answertopic">
-    insert into answertopic (answer_id, t_id, u_id, 
-      like, content, time)
+    insert into answertopic (answer_id, t_id, u_id,
+      `like`, content, `time`)
     values (#{answerId,jdbcType=BIGINT}, #{tId,jdbcType=BIGINT}, #{uId,jdbcType=BIGINT}, 
       #{like,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, #{time,jdbcType=DATE})
   </insert>
+
   <insert id="insertSelective" parameterType="com.qf.entity.Answertopic">
     insert into answertopic
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -41,13 +55,13 @@
         u_id,
       </if>
       <if test="like != null">
-        like,
+        `like`,
       </if>
       <if test="content != null">
         content,
       </if>
       <if test="time != null">
-        time,
+        `time`,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -81,13 +95,13 @@
         u_id = #{uId,jdbcType=BIGINT},
       </if>
       <if test="like != null">
-        like = #{like,jdbcType=BIGINT},
+        `like` = #{like,jdbcType=BIGINT},
       </if>
       <if test="content != null">
         content = #{content,jdbcType=VARCHAR},
       </if>
       <if test="time != null">
-        time = #{time,jdbcType=DATE},
+        `time` = #{time,jdbcType=DATE},
       </if>
     </set>
     where answer_id = #{answerId,jdbcType=BIGINT}
@@ -96,9 +110,9 @@
     update answertopic
     set t_id = #{tId,jdbcType=BIGINT},
       u_id = #{uId,jdbcType=BIGINT},
-      like = #{like,jdbcType=BIGINT},
+      `like` = #{like,jdbcType=BIGINT},
       content = #{content,jdbcType=VARCHAR},
-      time = #{time,jdbcType=DATE}
+      `time` = #{time,jdbcType=DATE}
     where answer_id = #{answerId,jdbcType=BIGINT}
   </update>
 </mapper>

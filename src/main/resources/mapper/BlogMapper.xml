@@ -17,7 +17,7 @@
     <result column="u_id" jdbcType="BIGINT" property="uId" />
   </resultMap>
   <sql id="Base_Column_List">
-    bolg_id, title, image_url, content, cimage, reply, collect, like, pub_date, edit_date, 
+    bolg_id, title, image_url, content, cimage, reply, collect, `like`, pub_date, edit_date,
     bolgstate, t_id, u_id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -33,7 +33,7 @@
   <insert id="insert" parameterType="com.qf.entity.Blog">
     insert into blog (bolg_id, title, image_url, 
       content, cimage, reply, 
-      collect, like, pub_date, 
+      collect, `like`, pub_date,
       edit_date, bolgstate, t_id, 
       u_id)
     values (#{bolgId,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{imageUrl,jdbcType=VARCHAR}, 
@@ -67,7 +67,7 @@
         collect,
       </if>
       <if test="like != null">
-        like,
+        `like`,
       </if>
       <if test="pubDate != null">
         pub_date,
@@ -149,7 +149,7 @@
         collect = #{collect,jdbcType=BIGINT},
       </if>
       <if test="like != null">
-        like = #{like,jdbcType=BIGINT},
+        `like` = #{like,jdbcType=BIGINT},
       </if>
       <if test="pubDate != null">
         pub_date = #{pubDate,jdbcType=DATE},
@@ -177,7 +177,7 @@
       cimage = #{cimage,jdbcType=VARCHAR},
       reply = #{reply,jdbcType=BIGINT},
       collect = #{collect,jdbcType=BIGINT},
-      like = #{like,jdbcType=BIGINT},
+      `like` = #{like,jdbcType=BIGINT},
       pub_date = #{pubDate,jdbcType=DATE},
       edit_date = #{editDate,jdbcType=DATE},
       bolgstate = #{bolgstate,jdbcType=BIGINT},
