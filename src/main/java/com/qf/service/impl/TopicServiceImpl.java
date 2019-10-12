@@ -1,5 +1,6 @@
 package com.qf.service.impl;
 
+import com.qf.dao.AnswertopicMapper;
 import com.qf.dao.TopicMapper;
 import com.qf.entity.Topic;
 import com.qf.service.TopicService;
@@ -17,6 +18,10 @@ import java.util.List;
 public class TopicServiceImpl implements TopicService{
     @Resource
     private TopicMapper topicMapper;
+
+    @Resource
+    private AnswertopicMapper answertopicMapper;
+
     @Override
     public List<Topic> findByTitle(String topicWords) {
         return topicMapper.findByTitle(topicWords);
@@ -40,5 +45,11 @@ public class TopicServiceImpl implements TopicService{
     @Override
     public List<Topic> findByAnswer() {
         return topicMapper.findByAnswer();
+    }
+
+    @Override
+    public List<Topic> findByAnswertopic(long uid) {
+        List<Long> tids= answertopicMapper.findByuId(uid);
+        return topicMapper.findByTids(tids);
     }
 }

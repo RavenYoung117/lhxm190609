@@ -24,4 +24,6 @@ public interface TopicMapper {
     List<Topic> findAllByType(String type);
 
     List<Topic> findByAnswer();
+
+    List<Topic> findByTids(List<Long> tids);
 }

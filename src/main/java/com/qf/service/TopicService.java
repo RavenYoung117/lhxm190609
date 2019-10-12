@@ -21,4 +21,6 @@ public interface TopicService {
     Topic findById(long tid);
 
     List<Topic> findByAnswer();
+
+    List<Topic> findByAnswertopic(long uid);
 }

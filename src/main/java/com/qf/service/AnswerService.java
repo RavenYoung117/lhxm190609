@@ -15,4 +15,5 @@ public interface AnswerService {
     List<Answertopic> findByTid(long tid);
 
     int insertAnswer(Answertopic answertopic);
+
 }

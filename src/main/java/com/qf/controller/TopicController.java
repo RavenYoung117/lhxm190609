@@ -70,4 +70,10 @@ public class TopicController {
         }
         return message;
     }
+    //我的：我参与讨论的话题
+    @RequestMapping("/getAnswertopics")
+    public List getAnswertopics(long uid){
+        List<Topic> list=topicService.findByAnswertopic(uid);
+        return list;
+    }
 }

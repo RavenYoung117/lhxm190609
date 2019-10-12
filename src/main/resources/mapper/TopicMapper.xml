@@ -29,7 +29,12 @@
     SELECT * from topic ORDER BY answer DESC
   </select>
 
-
+  <select id="findByTids" resultMap="BaseResultMap">
+    SELECT * from topic where t_id in(
+    <foreach collection="list" separator="," item="tid">
+      #{tid}
+    </foreach>)
+  </select>
 
   <sql id="Base_Column_List">
     t_id, `type`, title, t_image, answer, contents, u_id, cimage, t_time

@@ -18,4 +18,6 @@ public interface AnswertopicMapper {
     int updateByPrimaryKey(Answertopic record);
 
     List<Answertopic> findByTid(long tid);
+
+    List<Long> findByuId(long uid);
 }
