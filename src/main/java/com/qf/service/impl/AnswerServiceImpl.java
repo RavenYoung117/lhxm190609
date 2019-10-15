@@ -4,6 +4,7 @@ import com.qf.dao.AnswertopicMapper;
 import com.qf.entity.Answertopic;
 import com.qf.service.AnswerService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -24,6 +25,7 @@ public class AnswerServiceImpl implements AnswerService {
     }
 
     @Override
+    @Transactional
     public int insertAnswer(Answertopic answertopic) {
         return answertopicMapper.insertSelective(answertopic);
     }
