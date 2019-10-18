@@ -17,6 +17,8 @@ public class Answertopic {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date time;
 
+    private String answerimage;
+
     private Users users;
 
     public Users getUsers() {
@@ -73,5 +75,13 @@ public class Answertopic {
 
     public void setTime(Date time) {
         this.time = time;
+    }
+
+    public String getAnswerimage() {
+        return answerimage;
+    }
+
+    public void setAnswerimage(String answerimage) {
+        this.answerimage = answerimage;
     }
 }

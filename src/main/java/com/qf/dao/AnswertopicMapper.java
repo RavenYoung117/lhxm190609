@@ -20,4 +20,6 @@ public interface AnswertopicMapper {
     List<Answertopic> findByTid(long tid);
 
     List<Long> findByuId(long uid);
+
+    List<Answertopic> findAnswertopic(long uid);
 }

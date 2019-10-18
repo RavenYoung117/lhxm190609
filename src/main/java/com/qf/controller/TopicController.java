@@ -9,8 +9,12 @@ import com.qf.vo.ResultVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -68,10 +72,21 @@ public class TopicController {
     }
     //话题评论
     @RequestMapping("/insertAnswer")
-    public ResultVo insertAnswer(Answertopic answertopic){
-        if (answertopic==null){
+    public ResultVo insertAnswer(Answertopic answertopic, MultipartFile anImage,HttpServletRequest request){
+        if (answertopic.getContent()==null){
             return new ResultVOUtils().error();
         }
+        //获取uploadfile目录的真实路径
+        String realPath = request.getRealPath("/answerImage");
+        //得到上传文件的文件名
+        String filename=anImage.getOriginalFilename();
+        try {
+            anImage.transferTo(new File(realPath+"/"+filename));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //以上是上传文件到服务器的代码
+        answertopic.setAnswerimage(realPath+"/"+filename);
         Date date = new Date();
         answertopic.setTime(date);
         int i=answerService.insertAnswer(answertopic);
@@ -83,7 +98,7 @@ public class TopicController {
     //我的：我参与讨论的话题
     @RequestMapping("/getAnswertopics")
     public ResultVo getAnswertopics(long uid){
-        List<Topic> list=topicService.findByAnswertopic(uid);
-        return new ResultVOUtils<List<Topic>>().success(list);
+        List<Answertopic> list=answerService.findAnswertopic(uid);
+        return new ResultVOUtils<List<Answertopic>>().success(list);
     }
 }

@@ -8,13 +8,14 @@
     <result column="like" jdbcType="BIGINT" property="like" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="time" jdbcType="DATE" property="time" />
+    <result column="answerimage" jdbcType="VARCHAR" property="answerimage"></result>
     <association property="users" javaType="com.qf.entity.Users">
       <id column="u_id" jdbcType="BIGINT" property="uId" />
       <result column="uname" jdbcType="VARCHAR" property="uname" />
     </association>
   </resultMap>
   <sql id="Base_Column_List">
-    answer_id, t_id, u_id, `like`, content, `time`
+    answer_id, t_id, u_id, `like`, content, `time`,answerimage
   </sql>
 
   <select id="findByTid" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -27,6 +28,11 @@
   <select id="findByuId" resultType="Long">
     select t_id
     from answertopic
+    where u_id=#{uid}
+  </select>
+
+  <select id="findAnswertopic" resultMap="BaseResultMap">
+    select * from answertopic
     where u_id=#{uid}
   </select>
 
@@ -43,9 +49,9 @@
 
   <insert id="insert" parameterType="com.qf.entity.Answertopic">
     insert into answertopic (answer_id, t_id, u_id,
-      `like`, content, `time`)
+      `like`, content, `time`,answerimage)
     values (#{answerId,jdbcType=BIGINT}, #{tId,jdbcType=BIGINT}, #{uId,jdbcType=BIGINT}, 
-      #{like,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, #{time,jdbcType=DATE})
+      #{like,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, #{time,jdbcType=DATE},#{answerimage,jdbcType=VARCHAR})
   </insert>
 
   <insert id="insertSelective" parameterType="com.qf.entity.Answertopic">
@@ -69,6 +75,9 @@
       <if test="time != null">
         `time`,
       </if>
+      <if test="answerimage != null">
+        answerimage,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="answerId != null">
@@ -88,6 +97,9 @@
       </if>
       <if test="time != null">
         #{time,jdbcType=DATE},
+      </if>
+      <if test="answerimage != null">
+        #{answerimage,jdbcType=DATE},
       </if>
     </trim>
   </insert>
@@ -109,6 +121,9 @@
       <if test="time != null">
         `time` = #{time,jdbcType=DATE},
       </if>
+      <if test="answerimage != null">
+        answerimage = #{time,jdbcType=DATE},
+      </if>
     </set>
     where answer_id = #{answerId,jdbcType=BIGINT}
   </update>
@@ -118,7 +133,8 @@
       u_id = #{uId,jdbcType=BIGINT},
       `like` = #{like,jdbcType=BIGINT},
       content = #{content,jdbcType=VARCHAR},
-      `time` = #{time,jdbcType=DATE}
+      `time` = #{time,jdbcType=DATE},
+      answerimage = #{answerimage,jdbcType=VARCHAR}
     where answer_id = #{answerId,jdbcType=BIGINT}
   </update>
 </mapper>

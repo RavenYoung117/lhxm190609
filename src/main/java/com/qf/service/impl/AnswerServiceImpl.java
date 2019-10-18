@@ -29,4 +29,9 @@ public class AnswerServiceImpl implements AnswerService {
     public int insertAnswer(Answertopic answertopic) {
         return answertopicMapper.insertSelective(answertopic);
     }
+
+    @Override
+    public List<Answertopic> findAnswertopic(long uid) {
+        return answertopicMapper.findAnswertopic(uid);
+    }
 }
