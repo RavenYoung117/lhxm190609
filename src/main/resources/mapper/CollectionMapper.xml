@@ -3,13 +3,13 @@
 <mapper namespace="com.qf.dao.CollectionMapper">
   <resultMap id="BaseResultMap" type="com.qf.entity.Collection">
     <id column="c_id" jdbcType="BIGINT" property="cId" />
-    <result column="c_name" jdbcType="VARCHAR" property="cName" />
+    <result column="id" jdbcType="VARCHAR" property="id" />
     <result column="t_id" jdbcType="BIGINT" property="tId" />
     <result column="u_id" jdbcType="BIGINT" property="uId" />
     <result column="c_time" jdbcType="DATE" property="cTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    c_id, c_name, t_id, u_id, c_time
+    c_id, id, t_id, u_id, c_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -22,10 +22,10 @@
     where c_id = #{cId,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.qf.entity.Collection">
-    insert into collection (c_id, c_name, t_id, 
-      u_id, c_time)
-    values (#{cId,jdbcType=BIGINT}, #{cName,jdbcType=VARCHAR}, #{tId,jdbcType=BIGINT}, 
-      #{uId,jdbcType=BIGINT}, #{cTime,jdbcType=DATE})
+    insert into collection (c_id, id, t_id, u_id, 
+      c_time)
+    values (#{cId,jdbcType=BIGINT}, #{id,jdbcType=VARCHAR}, #{tId,jdbcType=BIGINT}, #{uId,jdbcType=BIGINT}, 
+      #{cTime,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="com.qf.entity.Collection">
     insert into collection
@@ -33,8 +33,8 @@
       <if test="cId != null">
         c_id,
       </if>
-      <if test="cName != null">
-        c_name,
+      <if test="id != null">
+        id,
       </if>
       <if test="tId != null">
         t_id,
@@ -50,8 +50,8 @@
       <if test="cId != null">
         #{cId,jdbcType=BIGINT},
       </if>
-      <if test="cName != null">
-        #{cName,jdbcType=VARCHAR},
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
       </if>
       <if test="tId != null">
         #{tId,jdbcType=BIGINT},
@@ -67,8 +67,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.qf.entity.Collection">
     update collection
     <set>
-      <if test="cName != null">
-        c_name = #{cName,jdbcType=VARCHAR},
+      <if test="id != null">
+        id = #{id,jdbcType=VARCHAR},
       </if>
       <if test="tId != null">
         t_id = #{tId,jdbcType=BIGINT},
@@ -84,7 +84,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.qf.entity.Collection">
     update collection
-    set c_name = #{cName,jdbcType=VARCHAR},
+    set id = #{id,jdbcType=VARCHAR},
       t_id = #{tId,jdbcType=BIGINT},
       u_id = #{uId,jdbcType=BIGINT},
       c_time = #{cTime,jdbcType=DATE}

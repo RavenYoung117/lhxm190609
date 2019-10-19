@@ -1,5 +1,6 @@
 package com.qf.service;
 
+import com.qf.entity.Record;
 import com.qf.entity.Topic;
 
 import java.util.List;
@@ -22,5 +23,9 @@ public interface TopicService {
 
     List<Topic> findByAnswer();
 
-    List<Topic> findByAnswertopic(long uid);
+    int insertRecord(Record record);
+
+    List<Record> findRecord(long uid);
+
+    List<Topic> findAllByTidList(List tidList);
 }

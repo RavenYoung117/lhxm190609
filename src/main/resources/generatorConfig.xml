@@ -42,19 +42,23 @@
         </javaClientGenerator>
 
 
-        <table tableName="answertopic" enableCountByExample="false"
+        <!--<table tableName="answertopic" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false">
         </table>
         <table tableName="blog" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>-->
+        <!--<table tableName="bookmark" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
         </table>
         <table tableName="collection" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false">
-        </table>
-        <table tableName="query" enableCountByExample="false"
+        </table>-->
+        <!--<table tableName="query" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false">
         </table>
@@ -69,7 +73,7 @@
         <table tableName="topic" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false">
-        </table>
+        </table>-->
         <table tableName="users" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" selectByExampleQueryId="false">

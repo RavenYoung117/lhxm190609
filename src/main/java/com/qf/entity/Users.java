@@ -14,6 +14,8 @@ public class Users {
 
     private String uname;
 
+    private String password;
+
     private Long gender;
 
     private Date birthday;
@@ -21,6 +23,10 @@ public class Users {
     private String self;
 
     private Long state;
+
+    private Integer money;
+
+    private String email;
 
     private List<Blog> blogList;
 
@@ -72,6 +78,14 @@ public class Users {
         this.uname = uname == null ? null : uname.trim();
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
+    }
+
     public Long getGender() {
         return gender;
     }
@@ -102,5 +116,21 @@ public class Users {
 
     public void setState(Long state) {
         this.state = state;
+    }
+
+    public Integer getMoney() {
+        return money;
+    }
+
+    public void setMoney(Integer money) {
+        this.money = money;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
     }
 }

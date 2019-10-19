@@ -5,7 +5,7 @@ package com.qf.vo;
  * Administrator
  * 响应结果的工具类
  */
-public class ResultVo<T> {
+public class ResultVO<T> {
     private int code;
     private String msg;
     private T data;

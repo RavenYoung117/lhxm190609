@@ -1,11 +1,13 @@
 package com.qf.controller;
 
 import com.qf.entity.Answertopic;
+import com.qf.entity.Record;
 import com.qf.entity.Topic;
+import com.qf.exception.WxException;
 import com.qf.service.AnswerService;
 import com.qf.service.TopicService;
 import com.qf.util.ResultVOUtils;
-import com.qf.vo.ResultVo;
+import com.qf.vo.ResultVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,10 +17,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * JokerHua
@@ -36,7 +35,7 @@ public class TopicController {
 
     //模糊查询话题
     @RequestMapping("/findTopic")
-    public ResultVo findTopic(String topicWords){
+    public ResultVO findTopic(String topicWords){
         if (topicWords==null){
             return new ResultVOUtils().error();
         }
@@ -45,7 +44,7 @@ public class TopicController {
     }
     //话题分类全查:返回全部类型
     @RequestMapping("/findType")
-    public ResultVo findType(){
+    public ResultVO findType(){
         List<String> list=topicService.findType();
         List<Topic> topicList=topicService.findByAnswer();
         Map map=new HashMap();
@@ -55,15 +54,22 @@ public class TopicController {
     }
     //话题分类全查:根据类型返回全部话题
     @RequestMapping("/findAllByType")
-    public ResultVo findAllByType(String type){
-        Topic topic = new Topic();
+    public ResultVO findAllByType(String type){
         List<Topic> list=topicService.findAllByType(type);
         return new ResultVOUtils<List<Topic>>().success(list);
     }
     //话题全查:根据话题id返回话题具体内容
-    @RequestMapping("/findById")
-    public ResultVo findById(long tid){
+    @RequestMapping("/findTopicBytid")
+    public ResultVO findtopicBytid(long tid){
         Topic topic=topicService.findById(tid);
+        if (topic==null){
+            throw new WxException("查询失败,请刷新！");
+        }
+        Record record = new Record();
+        record.setuId(topic.getuId());
+        record.settId(tid);
+        record.setrTime(new Date());
+        int i=topicService.insertRecord(record);
         List<Answertopic> answertopics = answerService.findByTid(tid);
         Map map=new HashMap();
         map.put("topic",topic);
@@ -72,7 +78,7 @@ public class TopicController {
     }
     //话题评论
     @RequestMapping("/insertAnswer")
-    public ResultVo insertAnswer(Answertopic answertopic, MultipartFile anImage,HttpServletRequest request){
+    public ResultVO insertAnswer(Answertopic answertopic, MultipartFile anImage, HttpServletRequest request){
         if (answertopic.getContent()==null){
             return new ResultVOUtils().error();
         }
@@ -97,8 +103,23 @@ public class TopicController {
     }
     //我的：我参与讨论的话题
     @RequestMapping("/getAnswertopics")
-    public ResultVo getAnswertopics(long uid){
+    public ResultVO getAnswertopics(long uid){
         List<Answertopic> list=answerService.findAnswertopic(uid);
         return new ResultVOUtils<List<Answertopic>>().success(list);
+    }
+
+    //我的：浏览记录（话题）
+    @RequestMapping("/getRecord")
+    public ResultVO getRecord(long uid){
+        List<Record> list=topicService.findRecord(uid);
+        if(list.size()==0){
+            throw new WxException("查询失败,请刷新！");
+        }
+        List tidList=new ArrayList();
+        for (Record record : list) {
+            tidList.add(record.gettId());
+        }
+        List<Topic> topiclist=topicService.findAllByTidList(tidList);
+        return new ResultVOUtils<List<Topic>>().success(topiclist);
     }
 }

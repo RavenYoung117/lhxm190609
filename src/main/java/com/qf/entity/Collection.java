@@ -5,7 +5,7 @@ import java.util.Date;
 public class Collection {
     private Long cId;
 
-    private String cName;
+    private String id;
 
     private Long tId;
 
@@ -21,12 +21,12 @@ public class Collection {
         this.cId = cId;
     }
 
-    public String getcName() {
-        return cName;
+    public String getId() {
+        return id;
     }
 
-    public void setcName(String cName) {
-        this.cName = cName == null ? null : cName.trim();
+    public void setId(String id) {
+        this.id = id == null ? null : id.trim();
     }
 
     public Long gettId() {

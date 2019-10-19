@@ -26,4 +26,5 @@ public interface TopicMapper {
     List<Topic> findByAnswer();
 
     List<Topic> findByTids(List<Long> tids);
+
 }

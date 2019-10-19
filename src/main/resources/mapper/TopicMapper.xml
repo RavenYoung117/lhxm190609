@@ -36,6 +36,7 @@
     </foreach>)
   </select>
 
+
   <sql id="Base_Column_List">
     t_id, `type`, title, t_image, answer, contents, u_id, cimage, t_time
   </sql>
