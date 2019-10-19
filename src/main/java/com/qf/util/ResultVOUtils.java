@@ -11,14 +11,14 @@ import com.qf.vo.ResultVo;
 public class ResultVOUtils<T> {
     public ResultVo success(T t){
         ResultVo resultVo = new ResultVo();
-        resultVo.setCode(1);
+        resultVo.setCode(0);
         resultVo.setMsg("成功");
         resultVo.setData(t);
         return resultVo;
     }
     public ResultVo  error(){
         ResultVo resultVo = new ResultVo();
-        resultVo.setCode(0);
+        resultVo.setCode(1);
         resultVo.setMsg("失败");
         resultVo.setData(null);
         return resultVo;
