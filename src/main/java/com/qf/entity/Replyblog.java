@@ -15,6 +15,16 @@ public class Replyblog {
 
     private Date rTime;
 
+    private Users users;
+
+    public Users getUsers() {
+        return users;
+    }
+
+    public void setUsers(Users users) {
+        this.users = users;
+    }
+
     public Long getrId() {
         return rId;
     }

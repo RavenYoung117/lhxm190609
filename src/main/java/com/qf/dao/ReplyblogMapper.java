@@ -2,6 +2,8 @@ package com.qf.dao;
 
 import com.qf.entity.Replyblog;
 
+import java.util.List;
+
 public interface ReplyblogMapper {
     int deleteByPrimaryKey(Long rId);
 
@@ -14,4 +16,7 @@ public interface ReplyblogMapper {
     int updateByPrimaryKeySelective(Replyblog record);
 
     int updateByPrimaryKey(Replyblog record);
+
+    //根据文章id查评论
+    List<Replyblog> findList(Long blogId);
 }

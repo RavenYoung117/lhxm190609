@@ -1,11 +1,15 @@
-package com.qf.dao;
+package com.qf.service;
 
 import com.qf.entity.Blog;
+import com.qf.entity.Replyblog;
 
 import java.util.List;
-import java.util.Map;
 
-public interface BlogMapper {
+/**
+ * wzg 2019/10/9 21:35
+ */
+public interface BlogService {
+
     int deleteByPrimaryKey(Long bolgId);
 
     int insert(Blog record);
@@ -18,10 +22,12 @@ public interface BlogMapper {
 
     int updateByPrimaryKey(Blog record);
 
-    //全查+模糊查
-    List<Blog> findAll(Map map);
 
-    Blog findByIdAndState(Map map);
+    List<Blog> findAll(String title);
 
+    Blog findByIdAndState(Long bolgId, Long bolgstate);
+
+    //根据文章id查评论
+    List<Replyblog> findList(Long blogId);
 
 }

@@ -8,6 +8,11 @@
     <result column="like" jdbcType="BIGINT" property="like" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="r_time" jdbcType="DATE" property="rTime" />
+    <association property="users" javaType="com.qf.entity.Users">
+      <id column="u_id" property="uId" />
+      <result column="uname" property="uname" />
+      <result column="icon_url" property="iconUrl" />
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
     r_id, blog_id, u_id, `like`, content, r_time
@@ -18,7 +23,12 @@
     from replyblog
     where r_id = #{rId,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <select id="findList" resultMap="BaseResultMap">
+      select r.*,u.u_id,u.uname,u.icon_url
+      from replyblog r,users u
+      where r.u_id=u.u_id and blog_id=#{blogId}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from replyblog
     where r_id = #{rId,jdbcType=BIGINT}
   </delete>

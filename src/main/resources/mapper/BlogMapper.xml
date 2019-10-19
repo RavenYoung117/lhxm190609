@@ -16,16 +16,48 @@
     <result column="t_id" jdbcType="BIGINT" property="tId" />
     <result column="u_id" jdbcType="BIGINT" property="uId" />
   </resultMap>
+  <resultMap id="BaseResultMap1" type="com.qf.entity.Blog">
+    <id column="bolg_id" jdbcType="BIGINT" property="bolgId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="image_url" jdbcType="VARCHAR" property="imageUrl" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="cimage" jdbcType="VARCHAR" property="cimage" />
+    <result column="reply" jdbcType="BIGINT" property="reply" />
+    <result column="collect" jdbcType="BIGINT" property="collect" />
+    <result column="like" jdbcType="BIGINT" property="like" />
+    <result column="pub_date" jdbcType="DATE" property="pubDate" />
+    <result column="edit_date" jdbcType="DATE" property="editDate" />
+    <result column="bolgstate" jdbcType="BIGINT" property="bolgstate" />
+    <result column="t_id" jdbcType="BIGINT" property="tId" />
+    <result column="u_id" jdbcType="BIGINT" property="uId" />
+    <association property="users" javaType="com.qf.entity.Users">
+      <id column="u_id" property="uId" />
+    </association>
+  </resultMap>
   <sql id="Base_Column_List">
     bolg_id, title, image_url, content, cimage, reply, collect, `like`, pub_date, edit_date,
     bolgstate, t_id, u_id
   </sql>
+  <select id="findAll" resultMap="BaseResultMap1">
+    select b.*,u.u_id
+    from users u,blog b
+    where b.u_id=u.u_id
+    <if test="title!=null and title!=''">
+      and b.title=#{title}
+    </if>
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from blog
     where bolg_id = #{bolgId,jdbcType=BIGINT}
   </select>
+  <select id="findByIdAndState" resultType="com.qf.entity.Blog">
+    select b.u_id,b.image_url,b.content,b.cimage,b.collect,b.like
+    from blog b,users u
+    where b.bolg_id=u.u_id and bolg_id=#{bolgId} and bolgstate=#{bolgstate}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from blog
     where bolg_id = #{bolgId,jdbcType=BIGINT}

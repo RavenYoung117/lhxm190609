@@ -1,6 +1,10 @@
 package com.qf.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
+import java.util.List;
 
 public class Blog {
     private Long bolgId;
@@ -19,8 +23,10 @@ public class Blog {
 
     private Long like;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date pubDate;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date editDate;
 
     private Long bolgstate;
@@ -28,6 +34,28 @@ public class Blog {
     private Long tId;
 
     private Long uId;
+
+    private Users users;
+
+    @JsonIgnore
+    private List<Replyblog> replyblogList;
+
+    public List<Replyblog> getReplyblogList() {
+        return replyblogList;
+    }
+
+    public void setReplyblogList(List<Replyblog> replyblogList) {
+        this.replyblogList = replyblogList;
+    }
+
+
+    public Users getUsers() {
+        return users;
+    }
+
+    public void setUsers(Users users) {
+        this.users = users;
+    }
 
     public Long getBolgId() {
         return bolgId;

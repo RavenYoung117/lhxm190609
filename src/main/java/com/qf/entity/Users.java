@@ -1,6 +1,7 @@
 package com.qf.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class Users {
     private Long uId;
@@ -20,6 +21,16 @@ public class Users {
     private String self;
 
     private Long state;
+
+    private List<Blog> blogList;
+
+    public List<Blog> getBlogList() {
+        return blogList;
+    }
+
+    public void setBlogList(List<Blog> blogList) {
+        this.blogList = blogList;
+    }
 
     public Long getuId() {
         return uId;
