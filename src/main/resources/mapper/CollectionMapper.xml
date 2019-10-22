@@ -3,11 +3,14 @@
 <mapper namespace="com.qf.dao.CollectionMapper">
   <resultMap id="BaseResultMap" type="com.qf.entity.Collection">
     <id column="c_id" jdbcType="BIGINT" property="cId" />
-    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="id" jdbcType="INTEGER" property="id" />
     <result column="t_id" jdbcType="BIGINT" property="tId" />
     <result column="u_id" jdbcType="BIGINT" property="uId" />
     <result column="c_time" jdbcType="DATE" property="cTime" />
   </resultMap>
+
+
+
   <sql id="Base_Column_List">
     c_id, id, t_id, u_id, c_time
   </sql>
@@ -24,7 +27,7 @@
   <insert id="insert" parameterType="com.qf.entity.Collection">
     insert into collection (c_id, id, t_id, u_id, 
       c_time)
-    values (#{cId,jdbcType=BIGINT}, #{id,jdbcType=VARCHAR}, #{tId,jdbcType=BIGINT}, #{uId,jdbcType=BIGINT}, 
+    values (#{cId,jdbcType=BIGINT}, #{id,jdbcType=INTEGER}, #{tId,jdbcType=BIGINT}, #{uId,jdbcType=BIGINT}, 
       #{cTime,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="com.qf.entity.Collection">
@@ -51,7 +54,7 @@
         #{cId,jdbcType=BIGINT},
       </if>
       <if test="id != null">
-        #{id,jdbcType=VARCHAR},
+        #{id,jdbcType=INTEGER},
       </if>
       <if test="tId != null">
         #{tId,jdbcType=BIGINT},
@@ -68,7 +71,7 @@
     update collection
     <set>
       <if test="id != null">
-        id = #{id,jdbcType=VARCHAR},
+        id = #{id,jdbcType=INTEGER},
       </if>
       <if test="tId != null">
         t_id = #{tId,jdbcType=BIGINT},
@@ -84,7 +87,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.qf.entity.Collection">
     update collection
-    set id = #{id,jdbcType=VARCHAR},
+    set id = #{id,jdbcType=INTEGER},
       t_id = #{tId,jdbcType=BIGINT},
       u_id = #{uId,jdbcType=BIGINT},
       c_time = #{cTime,jdbcType=DATE}

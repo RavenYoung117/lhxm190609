@@ -7,6 +7,11 @@
     <result column="q_type" jdbcType="VARCHAR" property="qType" />
     <result column="u_id" jdbcType="BIGINT" property="uId" />
   </resultMap>
+
+  <select id="selectbyuid" resultMap="BaseResultMap">
+    select q_id,record,q_type,u_id from query where u_id=#{uid} order by q_id desc limit 10
+  </select>
+
   <sql id="Base_Column_List">
     q_id, record, q_type, u_id
   </sql>

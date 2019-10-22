@@ -32,6 +32,14 @@
     <result column="u_id" jdbcType="BIGINT" property="uId" />
     <association property="users" javaType="com.qf.entity.Users">
       <id column="u_id" property="uId" />
+      <result column="phone" property="phone"/>
+      <result column="code" property="code"/>
+      <result column="icon_url" property="iconUrl"/>
+      <result column="uname" property="uname"/>
+      <result column="gender" property="gender"/>
+      <result column="birthday" property="birthday"/>
+      <result column="self" property="self"/>
+      <result column="state" property="state"/>
     </association>
   </resultMap>
   <sql id="Base_Column_List">
@@ -57,6 +65,44 @@
     from blog b,users u
     where b.bolg_id=u.u_id and bolg_id=#{bolgId} and bolgstate=#{bolgstate}
   </select>
+
+
+  <update id="deletecollect">
+    update blog set collect=collect-1 where bolg_id=#{blogid}
+  </update>
+
+  <update id="deletereply">
+    update blog set reply=reply-1 where bolg_id=#{blogid}
+  </update>
+
+  <update id="addcollect">
+    update blog set collect=collect+1 where bolg_id=#{blogid}
+  </update>
+
+  <update id="addreply">
+    update blog set reply=reply+1 where bolg_id=#{blogid}
+  </update>
+
+  <select id="detail" resultMap="BaseResultMap1">
+    SELECT b.bolg_id,b.title,b.image_url,b.content,b.cimage,
+    b.reply,b.collect,b.like,b.pub_date,b.edit_date,b.bolgstate,
+    u.u_id,u.uname,u.icon_url
+    FROM blog b JOIN users u ON b.u_id=u.u_id
+    WHERE b.bolg_id=#{blogid}
+  </select>
+
+  <select id="findblog" resultMap="BaseResultMap1">
+    SELECT b.bolg_id,b.title,b.image_url,b.cimage,
+    b.collect,b.bolgstate,u.uname,u.icon_url
+    FROM blog b JOIN users u ON b.u_id=u.u_id
+    WHERE  1=1
+    <if test="title!=null">
+      and title like '%${title}%'
+    </if>
+  </select>
+
+
+
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from blog

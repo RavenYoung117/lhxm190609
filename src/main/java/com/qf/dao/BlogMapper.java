@@ -23,5 +23,17 @@ public interface BlogMapper {
 
     Blog findByIdAndState(Map map);
 
+    //洪
+    int deletecollect(long blogid);
+
+    int deletereply(int blogid);
+
+    int addcollect(long blogid);
+
+    int addreply(int blogid);
+
+    Blog detail(Integer blogid);
+
+    List<Blog> findblog(Map map);
 
 }

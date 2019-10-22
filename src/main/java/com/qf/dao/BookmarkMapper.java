@@ -2,14 +2,19 @@ package com.qf.dao;
 
 import com.qf.entity.Bookmark;
 
+import java.util.List;
+
 public interface BookmarkMapper {
-    int deleteByPrimaryKey(Integer bId);
+
+    List<Bookmark> findbookmark();
+
+    int deleteByPrimaryKey(Long bId);
 
     int insert(Bookmark record);
 
     int insertSelective(Bookmark record);
 
-    Bookmark selectByPrimaryKey(Integer bId);
+    Bookmark selectByPrimaryKey(Long bId);
 
     int updateByPrimaryKeySelective(Bookmark record);
 

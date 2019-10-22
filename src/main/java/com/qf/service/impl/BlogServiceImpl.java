@@ -86,4 +86,42 @@ public class BlogServiceImpl implements BlogService {
     }
 
 
+    @Override
+    public List<Blog> fingblog(String title) {
+        Map map = new HashMap();
+        map.put("title",title);
+        List<Blog> blogList = blogMapper.findblog(map);
+        return blogList;
+    }
+
+    @Override
+    public Blog detail(Integer blogid) {
+        return blogMapper.detail(blogid);
+    }
+
+    @Override
+    @Transactional
+    public int addreply(int blogid) {
+        int addreply = blogMapper.addreply(blogid);
+        return addreply;
+    }
+
+    @Override
+    @Transactional
+    public int addcollect(long blogid) {
+        int addcollect = blogMapper.addcollect(blogid);
+        return addcollect;
+    }
+
+    @Override
+    public int deletereply(int blogid) {
+        int deletereply = blogMapper.deletereply(blogid);
+        return deletereply;
+    }
+
+    @Override
+    public int deletecollect(long blogid) {
+        int deletecollect = blogMapper.deletecollect(blogid);
+        return deletecollect;
+    }
 }

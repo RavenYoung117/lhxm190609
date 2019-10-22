@@ -30,4 +30,16 @@ public interface BlogService {
     //根据文章id查评论
     List<Replyblog> findList(Long blogId);
 
+
+    List<Blog> fingblog(String title);
+
+    Blog detail(Integer blogid);
+
+    int addreply(int blogid);
+
+    int addcollect(long blogid);
+
+    int deletereply(int blogid);
+
+    int deletecollect(long blogid);
 }

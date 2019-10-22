@@ -3,6 +3,7 @@ package com.qf.dao;
 import com.qf.entity.Replyblog;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ReplyblogMapper {
     int deleteByPrimaryKey(Long rId);
@@ -19,4 +20,10 @@ public interface ReplyblogMapper {
 
     //根据文章id查评论
     List<Replyblog> findList(Long blogId);
+
+    int addlike(int rid);
+
+    int insertReply(Map map);
+
+    Replyblog reply(Integer blogid);
 }

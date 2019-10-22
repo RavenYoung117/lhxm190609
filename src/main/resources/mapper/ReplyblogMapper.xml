@@ -8,14 +8,35 @@
     <result column="like" jdbcType="BIGINT" property="like" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="r_time" jdbcType="DATE" property="rTime" />
-    <association property="users" javaType="com.qf.entity.Users">
-      <id column="u_id" property="uId" />
-      <result column="uname" property="uname" />
-      <result column="icon_url" property="iconUrl" />
+    <association  property="users" javaType="com.qf.entity.Users">
+    <id column="u_id" property="uId"/>
+    <result column="phone" property="phone"/>
+    <result column="code" property="code"/>
+    <result column="icon_url" property="iconUrl"/>
+    <result column="uname" property="uname"/>
+    <result column="gender" property="gender"/>
+    <result column="birthday" property="birthday"/>
+    <result column="self" property="self"/>
+    <result column="state" property="state"/>
     </association>
   </resultMap>
+
+<update id="addlike">
+  update  replyblog set `like`=`like`+1 where r_id=#{rid}
+</update>
+
+  <insert id="insertReply" parameterType="com.qf.entity.Replyblog">
+    insert into replyblog(blog_id,u_id,content,r_time) values (#{blogid},#{uid},#{content},#{rtime})
+  </insert>
+
+  <select id="reply" resultMap="BaseResultMap">
+SELECT r.r_id,r.content,r.like,r.r_time,u.uname,u.icon_url
+FROM replyblog r JOIN users u ON r.u_id=u.u_id
+WHERE r.blog_id=#{blogid} order by `like` desc
+  </select>
+
   <sql id="Base_Column_List">
-    r_id, blog_id, u_id, `like`, content, r_time
+    r_id, blog_id, u_id, like, content, r_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -23,18 +44,13 @@
     from replyblog
     where r_id = #{rId,jdbcType=BIGINT}
   </select>
-    <select id="findList" resultMap="BaseResultMap">
-      select r.*,u.u_id,u.uname,u.icon_url
-      from replyblog r,users u
-      where r.u_id=u.u_id and blog_id=#{blogId}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from replyblog
     where r_id = #{rId,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.qf.entity.Replyblog">
     insert into replyblog (r_id, blog_id, u_id, 
-      `like`, content, r_time)
+      like, content, r_time)
     values (#{rId,jdbcType=BIGINT}, #{blogId,jdbcType=BIGINT}, #{uId,jdbcType=BIGINT}, 
       #{like,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, #{rTime,jdbcType=DATE})
   </insert>
@@ -51,7 +67,7 @@
         u_id,
       </if>
       <if test="like != null">
-        `like`,
+        like,
       </if>
       <if test="content != null">
         content,
@@ -91,7 +107,7 @@
         u_id = #{uId,jdbcType=BIGINT},
       </if>
       <if test="like != null">
-        `like` = #{like,jdbcType=BIGINT},
+        like = #{like,jdbcType=BIGINT},
       </if>
       <if test="content != null">
         content = #{content,jdbcType=VARCHAR},
@@ -106,7 +122,7 @@
     update replyblog
     set blog_id = #{blogId,jdbcType=BIGINT},
       u_id = #{uId,jdbcType=BIGINT},
-      `like` = #{like,jdbcType=BIGINT},
+      like = #{like,jdbcType=BIGINT},
       content = #{content,jdbcType=VARCHAR},
       r_time = #{rTime,jdbcType=DATE}
     where r_id = #{rId,jdbcType=BIGINT}
