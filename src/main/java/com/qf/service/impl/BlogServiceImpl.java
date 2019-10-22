@@ -2,13 +2,16 @@ package com.qf.service.impl;
 
 import com.qf.dao.BlogMapper;
 import com.qf.dao.ReplyblogMapper;
+import com.qf.dao.UsersMapper;
 import com.qf.entity.Blog;
 import com.qf.entity.Replyblog;
+import com.qf.form.BlogMoneyFrom;
 import com.qf.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +27,9 @@ public class BlogServiceImpl implements BlogService {
 
     @Autowired
     private ReplyblogMapper replyblogMapper;
+
+    @Resource
+    UsersMapper usersMapper;
 
     @Override
     public List<Blog> findAll(String title) {
@@ -124,4 +130,34 @@ public class BlogServiceImpl implements BlogService {
         int deletecollect = blogMapper.deletecollect(blogid);
         return deletecollect;
     }
+    @Override
+    public int AddBlogLike(int id) {
+        int i = blogMapper.AddBlogLike(id);
+        return i;
+    }
+
+    @Override
+    @Transactional
+    public int addBlogMoney(BlogMoneyFrom blogMoneyFrom) {
+        //减打赏者的金额
+        Map map1=new HashMap();
+        map1.put("userid",blogMoneyFrom.getUserid());
+        map1.put("money",blogMoneyFrom.getMoney());
+        int i = usersMapper.deMoney(map1);
+        if(i==0){
+            return 0;
+        }
+        //根据文章id查出文章作者id
+        Blog blog = blogMapper.findOne(blogMoneyFrom.getBlogid());
+        //加作者的余额
+        Map map2=new HashMap();
+        map2.put("userid",blog.getuId());
+        map2.put("money",blogMoneyFrom.getMoney());
+        int i1 = usersMapper.addMoney(map2);
+        if(i1==0){
+            return 0;
+        }
+        return 1;
+    }
+
 }

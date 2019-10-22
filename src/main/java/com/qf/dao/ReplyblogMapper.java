@@ -26,4 +26,6 @@ public interface ReplyblogMapper {
     int insertReply(Map map);
 
     Replyblog reply(Integer blogid);
+
+    public int addReplyBlogLike(int id);
 }

@@ -34,4 +34,9 @@ public class AnswerServiceImpl implements AnswerService {
     public List<Answertopic> findAnswertopic(long uid) {
         return answertopicMapper.findAnswertopic(uid);
     }
+    @Override
+    public int addLike(int id) {
+        int i = answertopicMapper.addLike(id);
+        return i;
+    }
 }

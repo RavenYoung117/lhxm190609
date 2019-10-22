@@ -1,10 +1,12 @@
 package com.qf.controller;
 
+import com.qf.dto.BookMarkDto;
 import com.qf.entity.Query;
 import com.qf.entity.Replyblog;
 import com.qf.service.BlogService;
 import com.qf.service.ReplybolgService;
 import com.qf.util.ResultVOUtils;
+import com.qf.util.ResultVoUtil;
 import com.qf.vo.ResultVO;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -64,5 +66,13 @@ public class ReplybolgController {
             return new ResultVOUtils<>().success(null);
         }
         return new ResultVOUtils<>().error();
+    }
+    @RequestMapping("/addReplyBlogLike")
+    public ResultVO addReplyBlogLike(int id){
+        int i = replybolgService.addReplyBlogLike(id);
+        if(i==0){
+            return new ResultVoUtil<List<BookMarkDto>>().error(null,"点赞失败");
+        }
+        return new ResultVoUtil<List<BookMarkDto>>().success(null,"点赞成功");
     }
 }

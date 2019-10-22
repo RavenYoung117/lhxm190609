@@ -36,4 +36,8 @@ public interface BlogMapper {
 
     List<Blog> findblog(Map map);
 
+    public int AddBlogLike(int id);
+
+    public Blog findOne(int id);
+
 }

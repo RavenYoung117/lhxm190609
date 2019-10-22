@@ -17,4 +17,6 @@ public interface AnswerService {
     int insertAnswer(Answertopic answertopic);
 
     List<Answertopic> findAnswertopic(long uid);
+
+    public int addLike(int id);
 }

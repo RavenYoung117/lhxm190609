@@ -137,4 +137,7 @@
       answerimage = #{answerimage,jdbcType=VARCHAR}
     where answer_id = #{answerId,jdbcType=BIGINT}
   </update>
+  <update id="addLike">
+    UPDATE answertopic SET `like`=`like`+1 WHERE answer_id=#{id}
+  </update>
 </mapper>

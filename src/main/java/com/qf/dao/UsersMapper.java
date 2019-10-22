@@ -39,4 +39,8 @@ public interface UsersMapper {
     int addUser(Map map);
     //更改手机号码
     int updateByphone(Map map);
+
+    public int addMoney(Map map);
+
+    public int deMoney(Map map);
 }

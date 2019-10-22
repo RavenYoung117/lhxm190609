@@ -21,6 +21,12 @@
     </association>
   </resultMap>
 
+  <select id="findList" resultMap="BaseResultMap">
+    select r.*,u.u_id,u.uname,u.icon_url
+    from replyblog r,users u
+    where r.u_id=u.u_id and blog_id=#{blogId}
+  </select>
+
 <update id="addlike">
   update  replyblog set `like`=`like`+1 where r_id=#{rid}
 </update>
@@ -126,5 +132,8 @@ WHERE r.blog_id=#{blogid} order by `like` desc
       content = #{content,jdbcType=VARCHAR},
       r_time = #{rTime,jdbcType=DATE}
     where r_id = #{rId,jdbcType=BIGINT}
+  </update>
+  <update id="addReplyBlogLike">
+    UPDATE replyblog SET `like`=`like`+1 WHERE r_id=#{id}
   </update>
 </mapper>

@@ -188,4 +188,11 @@
   <update id="updateByphone">
     update users set phone=#{phone} where password=#{password}
   </update>
+
+  <update id="addMoney">
+    update users set money=money+#{money} where u_id=#{userid}
+  </update>
+  <update id="deMoney">
+    update users set money=money-#{money} where u_id=#{userid}
+  </update>
 </mapper>

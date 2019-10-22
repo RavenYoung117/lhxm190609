@@ -19,4 +19,7 @@ public interface BookmarkMapper {
     int updateByPrimaryKeySelective(Bookmark record);
 
     int updateByPrimaryKey(Bookmark record);
+
+    public List<Bookmark> findBookMark(int id);
+    public int addBookMark(Bookmark bookMark);
 }

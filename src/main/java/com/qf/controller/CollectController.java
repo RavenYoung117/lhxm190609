@@ -1,15 +1,22 @@
 package com.qf.controller;
 
+import com.qf.dto.BookMarkDto;
 import com.qf.entity.Bookmark;
+import com.qf.entity.Collection;
+import com.qf.form.CollectionForm;
 import com.qf.service.BlogService;
 import com.qf.service.BookmarkService;
 import com.qf.service.CollectService;
 import com.qf.util.ResultVOUtils;
+import com.qf.util.ResultVoUtil;
 import com.qf.vo.ResultVO;
+import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,6 +33,45 @@ public class CollectController {
     @Resource
     private BlogService blogService;
 
+    @Resource
+    BookmarkService bookMarkService;
+    //根据用户id查询该用户有哪些文件夹
+    @RequestMapping("/chooseBookMark")
+    public ResultVO<List<BookMarkDto>> addCollection(int uid){
+        List<BookMarkDto> bookMark =bookMarkService.findBookMark(uid);
+        return new ResultVoUtil<List<BookMarkDto>>().success(bookMark,"");
+    }
+    /*    返回的数据：
+    [{"bId":1,"bName":"收藏夹1","bDate":1570464000000},
+    {"bId":2,"bName":"收藏夹2","bDate":1571068800000},
+    {"bId":3,"bName":"收藏夹3","bDate":1571155200000}]*/
+//用户新建收藏夹
+    @RequestMapping("addBookMark")
+    public ResultVO  addBookMark(String name,String derc){
+        Bookmark bookMark=new Bookmark();
+        bookMark.setbName(name);
+        bookMark.setbDate(new Date());
+        bookMark.setdDecr(derc);
+        int i = bookMarkService.addBookMark(bookMark);
+        if(i==0){
+            return new ResultVoUtil<List<BookMarkDto>>().error(null,"添加失败");
+        }
+        return new ResultVoUtil<List<BookMarkDto>>().success(null,"添加成功");
+    }
+    //成功返回success字符串，失败返回fail字符串
+
+    //用户添加收藏
+    @RequestMapping("addCollection")
+    public ResultVO addCollection(CollectionForm collectionForm){
+        Collection collection=new Collection();
+        BeanUtils.copyProperties(collectionForm,collection);
+        collection.setcTime(new Date());
+        int i = collectService.addCollection(collection);
+        if(i==0){
+            return new ResultVoUtil<List<BookMarkDto>>().error(null,"收藏失败");
+        }
+        return new ResultVoUtil<List<BookMarkDto>>().success(null,"收藏成功");
+    }
     @RequestMapping("/addcollect")
     public ResultVO addcollect(long blogid, long uid, int bookid){
         int i = collectService.insertSelective(blogid, uid, bookid);

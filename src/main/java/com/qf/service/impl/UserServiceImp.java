@@ -120,4 +120,12 @@ public class UserServiceImp implements UserService{
         map.put("password",password);
         return   dao.updateByphone(map);
     }
+    @Override
+    public int addMoney(int userid, int money) {
+        Map map=new HashMap();
+        map.put("userid",userid);
+        map.put("money",money);
+        int i = dao.addMoney(map);
+        return i;
+    }
 }

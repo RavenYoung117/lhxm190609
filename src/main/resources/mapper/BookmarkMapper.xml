@@ -84,4 +84,10 @@
       d_decr = #{dDecr,jdbcType=VARCHAR}
     where b_id = #{bId,jdbcType=BIGINT}
   </update>
+  <select id="findBookMark" resultMap="BaseResultMap">
+    SELECT * FROM bookmark WHERE b_id IN (SELECT DISTINCT  id FROM collection WHERE u_id=1)
+  </select>
+  <insert id="addBookMark">
+    insert into bookmark values(null,#{bName},#{bDate},#{dDecr})
+  </insert>
 </mapper>

@@ -93,4 +93,7 @@
       c_time = #{cTime,jdbcType=DATE}
     where c_id = #{cId,jdbcType=BIGINT}
   </update>
+  <insert id="addCollection">
+    insert into collection VALUES (null,#{id},#{tId},#{uId},#{cTime})
+  </insert>
 </mapper>

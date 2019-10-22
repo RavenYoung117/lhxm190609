@@ -1,5 +1,6 @@
 package com.qf.service;
 
+import com.qf.dto.BookMarkDto;
 import com.qf.entity.Bookmark;
 
 import java.util.List;
@@ -13,4 +14,7 @@ public interface BookmarkService {
     int addbookmark(String bname, String bdecr);
 
     List<Bookmark> findbookmark();
+
+    public List<BookMarkDto> findBookMark(int id);
+    public int addBookMark(Bookmark bookMark);
 }

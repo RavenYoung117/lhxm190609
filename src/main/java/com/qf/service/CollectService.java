@@ -1,6 +1,8 @@
 package com.qf.service;
 
 
+import com.qf.entity.Collection;
+
 /**
  * author：你的洪哥哥
  * date：2019-10-19 16:41
@@ -11,4 +13,7 @@ public interface CollectService {
 
     int deleteByPrimaryKey(Long cId);
 
+    int insert(Collection record);
+
+    int addCollection(Collection collection);
 }

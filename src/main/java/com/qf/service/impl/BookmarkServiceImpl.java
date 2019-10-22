@@ -1,12 +1,14 @@
 package com.qf.service.impl;
 
 import com.qf.dao.BookmarkMapper;
+import com.qf.dto.BookMarkDto;
 import com.qf.entity.Bookmark;
 import com.qf.service.BookmarkService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -37,5 +39,24 @@ public class BookmarkServiceImpl implements BookmarkService {
     public List<Bookmark> findbookmark() {
         List<Bookmark> bookmarkList = bookmarkMapper.findbookmark();
         return bookmarkList;
+    }
+
+    @Override
+    public List<BookMarkDto> findBookMark(int id) {
+        List<Bookmark> bookMark = bookmarkMapper.findBookMark(id);
+        List<BookMarkDto> bookMarkDtos=new ArrayList<>();
+        for (Bookmark mark : bookMark) {
+            BookMarkDto bookMarkDto=new BookMarkDto();
+            bookMarkDto.setbId(mark.getbId());
+            bookMarkDto.setbName(mark.getbName());
+            bookMarkDtos.add(bookMarkDto);
+        }
+        return bookMarkDtos;
+    }
+
+    @Override
+    public int addBookMark(Bookmark bookMark) {
+        int i = bookmarkMapper.addBookMark(bookMark);
+        return i;
     }
 }

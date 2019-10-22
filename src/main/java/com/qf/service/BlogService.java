@@ -2,6 +2,7 @@ package com.qf.service;
 
 import com.qf.entity.Blog;
 import com.qf.entity.Replyblog;
+import com.qf.form.BlogMoneyFrom;
 
 import java.util.List;
 
@@ -42,4 +43,8 @@ public interface BlogService {
     int deletereply(int blogid);
 
     int deletecollect(long blogid);
+
+    public int AddBlogLike(int id);
+
+    public int addBlogMoney(BlogMoneyFrom blogMoneyFrom);
 }

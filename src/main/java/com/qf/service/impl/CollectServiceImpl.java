@@ -40,4 +40,17 @@ public class CollectServiceImpl implements CollectService {
         int i = collectionMapper.deleteByPrimaryKey(cId);
         return i;
     }
+
+    @Override
+    public int insert(Collection record) {
+        int i = collectionMapper.insert(record);
+        return i;
+    }
+
+    @Override
+    public int addCollection(Collection collection) {
+        int i = collectionMapper.addCollection(collection);
+        return i;
+    }
+
 }

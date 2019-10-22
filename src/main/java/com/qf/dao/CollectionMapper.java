@@ -14,4 +14,6 @@ public interface CollectionMapper {
     int updateByPrimaryKeySelective(Collection record);
 
     int updateByPrimaryKey(Collection record);
+
+    public int addCollection(Collection collection);
 }

@@ -101,7 +101,12 @@
     </if>
   </select>
 
-
+  <update id="AddBlogLike">
+    UPDATE blog SET `like`=`like`+1 WHERE bolg_id=#{id}
+  </update>
+  <select id="findOne" resultMap="BaseResultMap">
+    select u_id from blog where bolg_id=#{id}
+  </select>
 
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">

@@ -1,7 +1,10 @@
 package com.qf.controller;
 
+import com.qf.dto.BookMarkDto;
 import com.qf.entity.Query;
+import com.qf.form.BlogMoneyFrom;
 import com.qf.service.QueryService;
+import com.qf.util.ResultVoUtil;
 import com.qf.vo.ResultVO;
 import com.qf.entity.Blog;
 import com.qf.entity.Replyblog;
@@ -107,5 +110,28 @@ public class BlogController {
     public ResultVO detail(Integer blogid){
         Blog blog = blogService.detail(blogid);
         return new ResultVOUtils<Blog>().success(blog);
+    }
+
+    @RequestMapping("/addBlogLike")
+    public ResultVO addBlogLike(int blogid) {
+        int i = blogService.AddBlogLike(blogid);
+        if(i==0){
+            return new ResultVoUtil<List<BookMarkDto>>().error(null,"点赞失败");
+        }
+        return new ResultVoUtil<List<BookMarkDto>>().success(null,"点赞成功");
+
+    }
+    @RequestMapping("/addBlogMoney")
+    public ResultVO addBlogMoney(BlogMoneyFrom blogMoneyFrom) {
+
+        /*if(i==0){
+            return new ResultVoUtil<List<BookMarkDto>>().error(null,"点赞失败");
+        }*/
+        int i = blogService.addBlogMoney(blogMoneyFrom);
+        if(i==0){
+            return new ResultVoUtil<List<BookMarkDto>>().error(null,"打赏失败");
+        }
+        return new ResultVoUtil<List<BookMarkDto>>().success(null,"打赏成功");
+
     }
 }

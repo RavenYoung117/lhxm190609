@@ -4,7 +4,9 @@ import com.qf.entity.Users;
 import com.qf.service.UserService;
 import com.aliyuncs.exceptions.ClientException;
 import com.qf.util.IsPhone;
+import com.qf.util.ResultVoUtil;
 import com.qf.util.SmsDysmapi;
+import com.qf.vo.ResultVO;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -181,5 +183,13 @@ public class UserController {
         }
 
         return map;
+    }
+    @RequestMapping("/addMoney")
+    public ResultVO addMoney(int userid, int money){
+        int i = service.addMoney(userid, money);
+        if(i==0){
+            return new ResultVoUtil<>().success(null,"充值失败");
+        }
+        return new ResultVoUtil<>().success(null,"充值成功");
     }
 }
