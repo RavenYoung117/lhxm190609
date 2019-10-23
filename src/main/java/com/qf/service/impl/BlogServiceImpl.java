@@ -120,17 +120,20 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
+    @Transactional
     public int deletereply(int blogid) {
         int deletereply = blogMapper.deletereply(blogid);
         return deletereply;
     }
 
     @Override
+    @Transactional
     public int deletecollect(long blogid) {
         int deletecollect = blogMapper.deletecollect(blogid);
         return deletecollect;
     }
     @Override
+    @Transactional
     public int AddBlogLike(int id) {
         int i = blogMapper.AddBlogLike(id);
         return i;
