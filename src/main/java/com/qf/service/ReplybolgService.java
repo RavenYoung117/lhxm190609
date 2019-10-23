@@ -10,7 +10,7 @@ import com.qf.entity.Replyblog;
  */
 public interface ReplybolgService {
 
-    Replyblog reply(Integer blogid);
+    List<Replyblog> reply(Integer blogid);
 
     int insertReply(Integer blogid, Integer uid, String content);
 
