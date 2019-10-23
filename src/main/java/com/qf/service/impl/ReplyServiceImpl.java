@@ -3,7 +3,6 @@ package com.qf.service.impl;
 import com.qf.dao.ReplyblogMapper;
 import com.qf.entity.Replyblog;
 import com.qf.service.ReplybolgService;
-import lombok.experimental.var;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,6 +10,7 @@ import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * author：你的洪哥哥
