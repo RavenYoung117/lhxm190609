@@ -1,6 +1,7 @@
 package com.qf.dao;
 
 import com.qf.entity.Users;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.Map;
 
@@ -43,4 +44,6 @@ public interface UsersMapper {
     public int addMoney(Map map);
 
     public int deMoney(Map map);
+
+    Users findUserByPhone(@Param(value = "phone") String phone);
 }

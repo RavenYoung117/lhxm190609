@@ -105,11 +105,12 @@ public class UserServiceImp implements UserService{
     }
 
     @Override
-    public int addUsers(String phone, String password,String uname) {
+    public int addUsers(String phone, String password,String uname,String iconUrl) {
         Map map = new HashMap();
         map.put("uanme",uname);
         map.put("phone",phone);
         map.put("password",password);
+        map.put("iconUrl",iconUrl);
         return dao.addUser(map);
     }
 
@@ -127,5 +128,10 @@ public class UserServiceImp implements UserService{
         map.put("money",money);
         int i = dao.addMoney(map);
         return i;
+    }
+
+    @Override
+    public Users findUserByPhone(String phone) {
+        return dao.findUserByPhone(phone);
     }
 }

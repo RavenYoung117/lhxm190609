@@ -86,7 +86,6 @@ public class BlogController {
 
     @RequestMapping("/findAllblog")
     public ResultVO findblog(String title,Long uid){
-
         List<Blog> blogList = blogService.fingblog(title);
         List<Query> queryList = queryService.selectbyuid(uid);
         if (title!=null&&uid!=null) {
@@ -104,6 +103,17 @@ public class BlogController {
             return new ResultVOUtils<List<Blog>>().error();
         }
         return new ResultVOUtils<List<Blog>>().success(blogList);
+    }
+    @RequestMapping("/findAllQuery")
+    public ResultVO findQuery(Long uid){
+        if (uid==null) {
+            return new ResultVOUtils<List<Blog>>().error();
+        }
+        List<Query> queryList = queryService.selectbyuid(uid);
+        if (queryList.size()==0){
+            return new ResultVOUtils<List<Blog>>().error();
+        }
+        return new ResultVOUtils<List<Query>>().success(queryList);
     }
 
     @RequestMapping("/blogdetail")

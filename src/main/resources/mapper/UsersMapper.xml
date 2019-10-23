@@ -181,8 +181,8 @@
     select  * from users  where phone =#{phone} and password=#{password}
   </select>
   <insert id="addUser"  >
-    insert into users (phone,password,uname)
-    values (#{phone},#{password},#{uname})
+    insert into users (phone,password,uname,icon_url)
+    values (#{phone},#{password},#{uname},#{iconUrl})
   </insert>
 
   <update id="updateByphone">
@@ -195,4 +195,8 @@
   <update id="deMoney">
     update users set money=money-#{money} where u_id=#{userid}
   </update>
+
+  <select id="findUserByPhone" resultMap="BaseResultMap">
+    select * from users where phone=#{phone}
+  </select>
 </mapper>

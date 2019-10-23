@@ -65,14 +65,15 @@ public class UserController {
     }
     //陈**
     @RequestMapping("/regist")
-    public Map regist(String phone,String code,String password,HttpSession session) {
+    public Map regist(String phone,String code,String password,HttpSession session, HttpServletRequest request) {
         String result =(String)session.getAttribute("result");
-        //System.out.println("phone = " + phone);
-        //System.out.println("password = " + password);
+
         String uname=phone;
+        String realPath = request.getRealPath( "/headimg");
+        String iconUrl = realPath+"/img1.jpeg";
         Map map=new HashMap();
         if (phone!=null&&result.equals(code)){
-            service.addUsers(phone,password,uname);
+            service.addUsers(phone,password,uname,iconUrl);
             map.put("code",200);
             map.put("msg","验证成功");
             return map;//跳转页面
@@ -95,6 +96,14 @@ public class UserController {
         }else if(!IsPhone.isMobileNO(phone)){
             map.put("msg","电话号码格式不正确！");
             map.put("code", 500);
+            return map;
+        }
+
+        Users users=service.findUserByPhone(phone);
+        if (users!=null){
+            map.put("msg","电话号码已被注册！");
+            map.put("code", 500);
+            return map;
         }
         //随机产生六位数字字符串的验证码
         Random random = new Random();
@@ -120,18 +129,21 @@ public class UserController {
                 session.setAttribute("user1",users1);
                 map.put("code", 200);
                 map.put("massage", "登陆成功");
+                map.put("data",users1);
+                session.setAttribute("user",users1);
                 return  map;//跳转主页
             } else {
                 map.put("code", 500);
                 map.put("massage", "密码错误");
             }
-
         }else{
             Users users2 =  service.FindByphone(phone,password);
             if (users2!=null){
                 session.setAttribute("user2",users2);
                 map.put("code", 200);
                 map.put("massage", "登陆成功");
+                map.put("data",users2);
+                session.setAttribute("user",users2);
                 return  map;//跳转至主页
             } else {
                 map.put("code", 500);
@@ -170,18 +182,24 @@ public class UserController {
         return map;
     }
     @RequestMapping("/update")
-    public Map update(String phone,String password,String code){
+    public Map update(String phone,String password,String code,HttpSession session){
         Map map = new HashMap();
-        if (phone!=null){
-            service.updatephone(phone,password);
-            map.put("msg","您的手机号码修改成功");
-            map.put("code",200);
-            map.put("data","sdsd");
-        }else {
-            map.put("code", 400);
-            map.put("msg", "您的手机号码修改失败");
-        }
+        String result = (String) session.getAttribute("result");
+        if(result.equals(code)){
+            if (phone!=null){
+                service.updatephone(phone,password);
+                map.put("msg","您的手机号码修改成功");
+                map.put("code",200);
+                map.put("data","sdsd");
+            }else {
+                map.put("code", 400);
+                map.put("msg", "您的手机号码修改失败");
+            }
 
+        }else{
+            map.put("code", 401);
+            map.put("msg", "您输入的验证码错误");
+        }
         return map;
     }
     @RequestMapping("/addMoney")
