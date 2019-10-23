@@ -70,9 +70,10 @@ public class ReplybolgController {
     @RequestMapping("/addReplyBlogLike")
     public ResultVO addReplyBlogLike(int id){
         int i = replybolgService.addReplyBlogLike(id);
+        Replyblog like = replybolgService.findLike(id);
         if(i==0){
             return new ResultVoUtil<List<BookMarkDto>>().error(null,"点赞失败");
         }
-        return new ResultVoUtil<List<BookMarkDto>>().success(null,"点赞成功");
+        return new ResultVoUtil<Long>().success(like.getLike(),"点赞成功");
     }
 }

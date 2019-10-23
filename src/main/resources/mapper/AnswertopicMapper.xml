@@ -140,4 +140,7 @@
   <update id="addLike">
     UPDATE answertopic SET `like`=`like`+1 WHERE answer_id=#{id}
   </update>
+  <select id="findLike" resultMap="BaseResultMap">
+    select `like` from answertopic where answer_id=#{id}
+  </select>
 </mapper>

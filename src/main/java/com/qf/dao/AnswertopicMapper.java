@@ -17,6 +17,8 @@ public interface AnswertopicMapper {
 
     int updateByPrimaryKey(Answertopic record);
 
+    public Answertopic findLike(int id);
+
     List<Answertopic> findByTid(long tid);
 
     List<Long> findByuId(long uid);

@@ -40,6 +40,4 @@ public interface BlogMapper {
 
     public Blog findOne(int id);
 
-    List<Blog> findByUid(Long uid);
-
 }

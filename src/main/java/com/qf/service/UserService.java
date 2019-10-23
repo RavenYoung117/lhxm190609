@@ -18,12 +18,10 @@ public interface UserService {
 
     Users FindByphone(String phone, String password);//手机号
 
-    int addUsers(String phone, String password,String uname,String iconUrl);//注册
+    int addUsers(String phone, String password,String uname);//注册
 
     int updatephone(String phone, String password);//修改手机号
 
     public int addMoney(int userid,int money);
-
-    Users findUserByPhone(String phone);
 }
 

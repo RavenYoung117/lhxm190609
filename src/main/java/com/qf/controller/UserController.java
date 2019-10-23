@@ -210,4 +210,9 @@ public class UserController {
         }
         return new ResultVoUtil<>().success(null,"充值成功");
     }
+    @RequestMapping("/findMoney")
+    public ResultVO findMoney(int userid){
+        Users money = service.findMoney(userid);
+        return new ResultVoUtil<>().success(money.getMoney(),"");
+    }
 }

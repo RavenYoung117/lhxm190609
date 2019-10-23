@@ -47,6 +47,4 @@ public interface BlogService {
     public int AddBlogLike(int id);
 
     public int addBlogMoney(BlogMoneyFrom blogMoneyFrom);
-
-    List<Blog> findByUid(Long uid);
 }

@@ -62,4 +62,10 @@ public class ReplyServiceImpl implements ReplybolgService {
         int i = replyblogMapper.addReplyBlogLike(id);
         return i;
     }
+
+    @Override
+    public Replyblog findLike(int id) {
+        Replyblog like = replyblogMapper.findLike(id);
+        return like;
+    }
 }

@@ -21,4 +21,6 @@ public interface ReplybolgService {
     int addlike(int rid);
 
     public int addReplyBlogLike(int id);
+
+    public Replyblog findLike(int id);
 }
