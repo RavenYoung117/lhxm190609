@@ -42,12 +42,14 @@ public class CollectServiceImpl implements CollectService {
     }
 
     @Override
+    @Transactional
     public int insert(Collection record) {
         int i = collectionMapper.insert(record);
         return i;
     }
 
     @Override
+    @Transactional
     public int addCollection(Collection collection) {
         int i = collectionMapper.addCollection(collection);
         return i;
