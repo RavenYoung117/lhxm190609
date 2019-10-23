@@ -134,4 +134,15 @@ public class BlogController {
         return new ResultVoUtil<List<BookMarkDto>>().success(null,"打赏成功");
 
     }
+
+    @RequestMapping("findbyuid")
+    @ResponseBody
+    public ResultVO<List<Blog>> findUid(Long uId){
+        if (uId<=0){
+            throw new WxException("用户未登录");
+        }
+        List<Blog> blogList = blogService.findByUid(uId);
+
+        return new ResultVOUtils<List<Blog>>().success(blogList);
+    }
 }

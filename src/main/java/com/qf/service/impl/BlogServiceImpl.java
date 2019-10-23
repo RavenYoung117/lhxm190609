@@ -163,4 +163,10 @@ public class BlogServiceImpl implements BlogService {
         return 1;
     }
 
+    @Override
+    public List<Blog> findByUid(Long uid) {
+        List<Blog> byUid = blogMapper.findByUid(uid);
+        return byUid;
+    }
+
 }

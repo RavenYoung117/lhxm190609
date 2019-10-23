@@ -268,4 +268,9 @@
       u_id = #{uId,jdbcType=BIGINT}
     where bolg_id = #{bolgId,jdbcType=BIGINT}
   </update>
+
+  <select id="findByUid" resultType="com.qf.entity.Blog">
+      select * from blog
+      where u_id=#{uid}
+    </select>
 </mapper>
