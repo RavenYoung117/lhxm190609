@@ -1,5 +1,7 @@
 package com.qf.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Collection {
@@ -10,7 +12,7 @@ public class Collection {
     private Long tId;
 
     private Long uId;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date cTime;
 
     public Long getcId() {

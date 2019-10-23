@@ -1,5 +1,7 @@
 package com.qf.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Replyblog {
@@ -12,7 +14,7 @@ public class Replyblog {
     private Long like;
 
     private String content;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date rTime;
 
     private Users users;

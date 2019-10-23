@@ -1,12 +1,14 @@
 package com.qf.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Bookmark {
     private Integer bId;
 
     private String bName;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date bDate;
 
     private String dDecr;
