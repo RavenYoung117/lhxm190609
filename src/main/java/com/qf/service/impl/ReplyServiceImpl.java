@@ -24,7 +24,7 @@ public class ReplyServiceImpl implements ReplybolgService {
     ReplyblogMapper replyblogMapper;
 
     @Override
-    public Replyblog reply(Integer blogid) {
+    public List<Replyblog> reply(Integer blogid) {
         return replyblogMapper.reply(blogid);
     }
 
@@ -57,6 +57,7 @@ public class ReplyServiceImpl implements ReplybolgService {
         return addlike;
     }
     @Override
+    @Transactional
     public int addReplyBlogLike(int id) {
         int i = replyblogMapper.addReplyBlogLike(id);
         return i;
