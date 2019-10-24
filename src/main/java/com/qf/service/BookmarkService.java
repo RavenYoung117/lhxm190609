@@ -13,7 +13,7 @@ import java.util.List;
 public interface BookmarkService {
     int addbookmark(String bname, String bdecr);
 
-    List<Bookmark> findbookmark();
+    List<Bookmark> findbookmark(int uid);
 
     public List<BookMarkDto> findBookMark(int id);
     public int addBookMark(Bookmark bookMark);

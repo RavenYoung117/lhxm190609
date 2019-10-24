@@ -89,26 +89,33 @@ public class BlogController {
 
     @RequestMapping("/findAllblog")
     public ResultVO findblog(String title,Long uid){
-
-        List<Blog> blogList = blogService.fingblog(title);
-        List<Query> queryList = queryService.selectbyuid(uid);
-        if(blogList.size()!=0) {
-            if (title != null && uid != null) {
-                int i = 0;
-                for (Query query : queryList) {
-                    if (title.equals(query.getRecord())) {
-                        i = 1;
+        if (uid==null) {
+            List<Blog> blogList = blogService.fingblog(title);
+            if (blogList.size() == 0) {
+                return new ResultVOUtils<List<Blog>>().error();
+            }
+            return new ResultVOUtils<List<Blog>>().success(blogList);
+        }else {
+            List<Blog> blogList = blogService.fingblog(title);
+            List<Query> queryList = queryService.selectbyuid(uid);
+            if (blogList.size() != 0) {
+                if (title != null && uid != null) {
+                    int i = 0;
+                    for (Query query : queryList) {
+                        if (title.equals(query.getRecord())) {
+                            i = 1;
+                        }
+                    }
+                    if (i == 0) {
+                        queryService.insertSelective(title, uid);
                     }
                 }
-                if (i == 0) {
-                    queryService.insertSelective(title, uid);
-                }
             }
+            if (blogList.size() == 0) {
+                return new ResultVOUtils<List<Blog>>().error();
+            }
+            return new ResultVOUtils<List<Blog>>().success(blogList);
         }
-        if (blogList.size()==0){
-            return new ResultVOUtils<List<Blog>>().error();
-        }
-        return new ResultVOUtils<List<Blog>>().success(blogList);
     }
     @RequestMapping("/findAllQuery")
     public ResultVO findQuery(Long uid){
@@ -124,6 +131,9 @@ public class BlogController {
 
     @RequestMapping("/blogdetail")
     public ResultVO detail(Integer blogid){
+        if (blogid==null) {
+            return new ResultVOUtils<Blog>().error();
+        }
         Blog blog = blogService.detail(blogid);
         return new ResultVOUtils<Blog>().success(blog);
     }

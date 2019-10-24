@@ -19,5 +19,5 @@ public interface CollectService {
 
     int addCollection(Collection collection);
 
-    List<Collection> showcollect(int uid);
+    List<Collection> showcollect(int uid,int bookid);
 }

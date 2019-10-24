@@ -36,8 +36,8 @@ public class BookmarkServiceImpl implements BookmarkService {
     }
 
     @Override
-    public List<Bookmark> findbookmark() {
-        List<Bookmark> bookmarkList = bookmarkMapper.findbookmark();
+    public List<Bookmark> findbookmark(int uid) {
+        List<Bookmark> bookmarkList = bookmarkMapper.findbookmark(uid);
         return bookmarkList;
     }
 

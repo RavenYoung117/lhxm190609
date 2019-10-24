@@ -5,6 +5,7 @@ import com.qf.service.BookmarkService;
 import com.qf.util.ResultVOUtils;
 import com.qf.vo.ResultVO;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -31,8 +32,11 @@ public class BookmarkController {
     }
 
     @RequestMapping("/findbookmark")
-    public ResultVO findbookmark(){
-        List<Bookmark> bookmarkList = bookmarkService.findbookmark();
+    public ResultVO findbookmark(@RequestParam(defaultValue = "-1") int uid){
+        if (uid==-1) {
+            return new ResultVOUtils<>().error();
+        }
+        List<Bookmark> bookmarkList = bookmarkService.findbookmark(uid);
         return new ResultVOUtils<List<Bookmark>>().success(bookmarkList);
     }
 }

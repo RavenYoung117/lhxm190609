@@ -5,6 +5,7 @@ import com.qf.service.QueryService;
 import com.qf.util.ResultVOUtils;
 import com.qf.vo.ResultVO;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -22,7 +23,10 @@ public class QueryController {
     private QueryService queryService;
 
     @RequestMapping("/showquery")
-    public ResultVO showquery(int uid){
+    public ResultVO showquery(@RequestParam(defaultValue = "-1") int uid){
+        if (uid==-1) {
+            return null;
+        }
         List<Query> queryList = queryService.selectbyuid(uid);
         return new ResultVOUtils<List<Query>>().success(queryList);
     }

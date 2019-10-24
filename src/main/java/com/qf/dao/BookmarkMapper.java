@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface BookmarkMapper {
 
-    List<Bookmark> findbookmark();
+    List<Bookmark> findbookmark(int uid);
 
     int deleteByPrimaryKey(Long bId);
 

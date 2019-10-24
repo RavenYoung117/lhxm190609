@@ -8,7 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * author：你的洪哥哥
@@ -57,8 +59,11 @@ public class CollectServiceImpl implements CollectService {
     }
 
     @Override
-    public List<Collection> showcollect(int uid) {
-        List<Collection> collectionList = collectionMapper.showcollect(uid);
+    public List<Collection> showcollect(int uid,int bookid) {
+        Map map = new HashMap();
+        map.put("uid",uid);
+        map.put("bookid",bookid);
+        List<Collection> collectionList = collectionMapper.showcollect(map);
         return collectionList;
     }
 

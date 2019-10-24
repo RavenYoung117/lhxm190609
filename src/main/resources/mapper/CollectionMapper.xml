@@ -103,6 +103,6 @@
   <select id="showcollect" resultMap="BaseResultMap">
     SELECT b.bolg_id,b.title,b.image_url,con.c_time
     FROM collection con,blog b
-    WHERE con.u_id=#{uid} and con.t_id=b.bolg_id
+    WHERE con.t_id=b.bolg_id and con.u_id=#{uid} and con.id=#{bookid}
   </select>
 </mapper>

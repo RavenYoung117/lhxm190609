@@ -97,8 +97,12 @@ public class CollectController {
         return new ResultVOUtils<>().error();
     }
     @RequestMapping("/showcollect")
-    public ResultVO showcollect(@RequestParam(defaultValue = "-1") int uid){
-        List<Collection> collectionList = collectService.showcollect(uid);
+    public ResultVO showcollect(@RequestParam(defaultValue = "-1") int uid,
+                                @RequestParam(defaultValue = "-1") int bookid){
+        if (uid==-1||bookid==-1) {
+            return new ResultVOUtils<List<Collection>>().error();
+        }
+        List<Collection> collectionList = collectService.showcollect(uid,bookid);
         if (collectionList.size()!=0) {
             return new ResultVOUtils<List<Collection>>().success(collectionList);
         }else {

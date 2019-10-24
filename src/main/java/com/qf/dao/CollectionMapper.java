@@ -3,6 +3,7 @@ package com.qf.dao;
 import com.qf.entity.Collection;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CollectionMapper {
     int deleteByPrimaryKey(Long cId);
@@ -19,5 +20,5 @@ public interface CollectionMapper {
 
     public int addCollection(Collection collection);
 
-    List<Collection> showcollect(int uid);
+    List<Collection> showcollect(Map map);
 }

@@ -10,7 +10,7 @@
   </resultMap>
 
   <select id="findbookmark" resultMap="BaseResultMap">
-    SELECT b_id,b_name,b_date,d_decr,uid FROM bookmark
+    SELECT b_id,b_name,b_date,d_decr,uid FROM bookmark where uid=#{uid}
   </select>
 
   <sql id="Base_Column_List">
