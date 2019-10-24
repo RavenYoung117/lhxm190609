@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.dao.TopicMapper">
+  <resultMap id="BaseResultMap" type="com.qf.entity.Topic">
+    <id column="t_id" jdbcType="BIGINT" property="tId" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="t_image" jdbcType="VARCHAR" property="tImage" />
+    <result column="answer" jdbcType="BIGINT" property="answer" />
+    <result column="contents" jdbcType="VARCHAR" property="contents" />
+    <result column="u_id" jdbcType="BIGINT" property="uId" />
+    <result column="cimage" jdbcType="VARCHAR" property="cimage" />
+    <result column="t_time" jdbcType="DATE" property="tTime" />
+  </resultMap>
+
+  <select id="findByTitle" resultMap="BaseResultMap">
+    SELECT * from topic where title like "%"#{topicWords}"%"
+  </select>
+
+  <select id="findType" resultType="String">
+    SELECT type from topic GROUP BY type
+  </select>
+
+  <select id="findAllByType" resultMap="BaseResultMap">
+    SELECT * from topic where type=#{type}
+  </select>
+
+  <select id="findByAnswer" resultMap="BaseResultMap">
+    SELECT * from topic ORDER BY answer DESC
+  </select>
+
+  <select id="findByTids" resultMap="BaseResultMap">
+    SELECT * from topic where t_id in(
+    <foreach collection="list" separator="," item="tid">
+      #{tid}
+    </foreach>)
+  </select>
+
+
+  <sql id="Base_Column_List">
+    t_id, `type`, title, t_image, answer, contents, u_id, cimage, t_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from topic
+    where t_id = #{tId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from topic
+    where t_id = #{tId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.qf.entity.Topic">
+    insert into topic (t_id, `type`, title,
+      t_image, answer, contents, 
+      u_id, cimage, t_time)
+    values (#{tId,jdbcType=BIGINT}, #{type,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{tImage,jdbcType=VARCHAR}, #{answer,jdbcType=BIGINT}, #{contents,jdbcType=VARCHAR}, 
+      #{uId,jdbcType=BIGINT}, #{cimage,jdbcType=VARCHAR}, #{tTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qf.entity.Topic">
+    insert into topic
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tId != null">
+        t_id,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="tImage != null">
+        t_image,
+      </if>
+      <if test="answer != null">
+        answer,
+      </if>
+      <if test="contents != null">
+        contents,
+      </if>
+      <if test="uId != null">
+        u_id,
+      </if>
+      <if test="cimage != null">
+        cimage,
+      </if>
+      <if test="tTime != null">
+        t_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tId != null">
+        #{tId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="tImage != null">
+        #{tImage,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null">
+        #{answer,jdbcType=BIGINT},
+      </if>
+      <if test="contents != null">
+        #{contents,jdbcType=VARCHAR},
+      </if>
+      <if test="uId != null">
+        #{uId,jdbcType=BIGINT},
+      </if>
+      <if test="cimage != null">
+        #{cimage,jdbcType=VARCHAR},
+      </if>
+      <if test="tTime != null">
+        #{tTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qf.entity.Topic">
+    update topic
+    <set>
+      <if test="type != null">
+        `type` = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="tImage != null">
+        t_image = #{tImage,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null">
+        answer = #{answer,jdbcType=BIGINT},
+      </if>
+      <if test="contents != null">
+        contents = #{contents,jdbcType=VARCHAR},
+      </if>
+      <if test="uId != null">
+        u_id = #{uId,jdbcType=BIGINT},
+      </if>
+      <if test="cimage != null">
+        cimage = #{cimage,jdbcType=VARCHAR},
+      </if>
+      <if test="tTime != null">
+        t_time = #{tTime,jdbcType=DATE},
+      </if>
+    </set>
+    where t_id = #{tId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qf.entity.Topic">
+    update topic
+    set type = #{type,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      t_image = #{tImage,jdbcType=VARCHAR},
+      answer = #{answer,jdbcType=BIGINT},
+      contents = #{contents,jdbcType=VARCHAR},
+      u_id = #{uId,jdbcType=BIGINT},
+      cimage = #{cimage,jdbcType=VARCHAR},
+      t_time = #{tTime,jdbcType=DATE}
+    where t_id = #{tId,jdbcType=BIGINT}
+  </update>
+</mapper>

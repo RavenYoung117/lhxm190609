@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.dao.BookmarkMapper">
+  <resultMap id="BaseResultMap" type="com.qf.entity.Bookmark">
+    <id column="b_id" jdbcType="BIGINT" property="bId" />
+    <result column="b_name" jdbcType="VARCHAR" property="bName" />
+    <result column="b_date" jdbcType="DATE" property="bDate" />
+    <result column="d_decr" jdbcType="VARCHAR" property="dDecr" />
+  </resultMap>
+
+  <select id="findbookmark" resultMap="BaseResultMap">
+    SELECT b_id,b_name,b_date,d_decr FROM bookmark
+  </select>
+
+  <sql id="Base_Column_List">
+    b_id, b_name, b_date, d_decr
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bookmark
+    where b_id = #{bId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from bookmark
+    where b_id = #{bId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.qf.entity.Bookmark">
+    insert into bookmark (b_id, b_name, b_date, 
+      d_decr)
+    values (#{bId,jdbcType=BIGINT}, #{bName,jdbcType=VARCHAR}, #{bDate,jdbcType=DATE}, 
+      #{dDecr,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qf.entity.Bookmark">
+    insert into bookmark
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bId != null">
+        b_id,
+      </if>
+      <if test="bName != null">
+        b_name,
+      </if>
+      <if test="bDate != null">
+        b_date,
+      </if>
+      <if test="dDecr != null">
+        d_decr,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bId != null">
+        #{bId,jdbcType=BIGINT},
+      </if>
+      <if test="bName != null">
+        #{bName,jdbcType=VARCHAR},
+      </if>
+      <if test="bDate != null">
+        #{bDate,jdbcType=DATE},
+      </if>
+      <if test="dDecr != null">
+        #{dDecr,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qf.entity.Bookmark">
+    update bookmark
+    <set>
+      <if test="bName != null">
+        b_name = #{bName,jdbcType=VARCHAR},
+      </if>
+      <if test="bDate != null">
+        b_date = #{bDate,jdbcType=DATE},
+      </if>
+      <if test="dDecr != null">
+        d_decr = #{dDecr,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where b_id = #{bId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qf.entity.Bookmark">
+    update bookmark
+    set b_name = #{bName,jdbcType=VARCHAR},
+      b_date = #{bDate,jdbcType=DATE},
+      d_decr = #{dDecr,jdbcType=VARCHAR}
+    where b_id = #{bId,jdbcType=BIGINT}
+  </update>
+  <select id="findBookMark" resultMap="BaseResultMap">
+    SELECT * FROM bookmark WHERE b_id IN (SELECT DISTINCT  id FROM collection WHERE u_id=1)
+  </select>
+  <insert id="addBookMark">
+    insert into bookmark values(null,#{bName},#{bDate},#{dDecr})
+  </insert>
+</mapper>
