@@ -92,7 +92,7 @@ public class TopicController {
             e.printStackTrace();
         }
         //以上是上传文件到服务器的代码
-        answertopic.setAnswerimage("answerImage"+filename);
+        answertopic.setAnswerimage("answerImage/"+filename);
         Date date = new Date();
         answertopic.setTime(date);
         int i=answerService.insertAnswer(answertopic);

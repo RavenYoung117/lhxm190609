@@ -37,7 +37,7 @@ public class UserController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return service.updateheadimg(id,realPath+"/"+filename);
+        return service.updateheadimg(id,"headimg/"+filename);
     }
     @RequestMapping("updateuname")
     public int upheadimg(Integer id, String uname, ModelMap map){
@@ -69,8 +69,8 @@ public class UserController {
         String result =(String)session.getAttribute("result");
 
         String uname=phone;
-        String realPath = request.getRealPath("/headimg");
-        String iconUrl = "headimg"+"/img1.jpeg";
+        //String realPath = request.getRealPath("/headimg");
+        String iconUrl = "headimg/img1.jpeg";
         Map map=new HashMap();
         if (phone!=null&&result.equals(code)){
             service.addUsers(phone,password,uname,iconUrl);

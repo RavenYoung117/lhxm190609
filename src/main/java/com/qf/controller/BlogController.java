@@ -43,11 +43,11 @@ public class BlogController {
         //得到上传文件的文件名
         String filename = file.getOriginalFilename();
         try {
-            file.transferTo(new File("blogImage"+filename));
+            file.transferTo(new File(realPath+"/"+filename));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        blog.setImageUrl(realPath+"/"+filename);
+        blog.setImageUrl("blogImage/"+filename);
         blog.setCimage(filename);
         blog.setPubDate(new Date());
         blog.setEditDate(new Date());
