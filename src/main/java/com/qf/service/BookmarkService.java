@@ -11,7 +11,7 @@ import java.util.List;
  * description:妈妈我想吃烤山药
  */
 public interface BookmarkService {
-    int addbookmark(String bname, String bdecr);
+    int addbookmark(String bname, String bdecr,int uid);
 
     List<Bookmark> findbookmark(int uid);
 

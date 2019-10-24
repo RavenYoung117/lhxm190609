@@ -25,12 +25,13 @@ public class BookmarkServiceImpl implements BookmarkService {
 
     @Override
     @Transactional
-    public int addbookmark(String bname,String decr) {
+    public int addbookmark(String bname,String decr,int uid) {
         Bookmark bookmark = new Bookmark();
         Date date = new Date();
         bookmark.setbName(bname);
         bookmark.setbDate(date);
         bookmark.setdDecr(decr);
+        bookmark.setUid(uid);
         int insertbookmark = bookmarkMapper.insertSelective(bookmark);
         return insertbookmark;
     }

@@ -23,8 +23,8 @@ public class BookmarkController {
     BookmarkService bookmarkService;
 
     @RequestMapping("/addbookmark")
-    public ResultVO addbookmark(String bname,String ddecr){
-        int addbookmark = bookmarkService.addbookmark(bname,ddecr);
+    public ResultVO addbookmark(String bname,String ddecr,int uid){
+        int addbookmark = bookmarkService.addbookmark(bname,ddecr,uid);
         if (addbookmark>0){
             return new ResultVOUtils<>().success(null);
         }
