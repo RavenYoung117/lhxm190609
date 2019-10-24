@@ -6,14 +6,15 @@
     <result column="b_name" jdbcType="VARCHAR" property="bName" />
     <result column="b_date" jdbcType="DATE" property="bDate" />
     <result column="d_decr" jdbcType="VARCHAR" property="dDecr" />
+    <result column="uid" jdbcType="VARCHAR" property="uid" />
   </resultMap>
 
   <select id="findbookmark" resultMap="BaseResultMap">
-    SELECT b_id,b_name,b_date,d_decr FROM bookmark
+    SELECT b_id,b_name,b_date,d_decr,uid FROM bookmark
   </select>
 
   <sql id="Base_Column_List">
-    b_id, b_name, b_date, d_decr
+    b_id, b_name, b_date, d_decr,uid
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -27,9 +28,9 @@
   </delete>
   <insert id="insert" parameterType="com.qf.entity.Bookmark">
     insert into bookmark (b_id, b_name, b_date, 
-      d_decr)
+      d_decr,uid)
     values (#{bId,jdbcType=BIGINT}, #{bName,jdbcType=VARCHAR}, #{bDate,jdbcType=DATE}, 
-      #{dDecr,jdbcType=VARCHAR})
+      #{dDecr,jdbcType=VARCHAR},#{uid})
   </insert>
   <insert id="insertSelective" parameterType="com.qf.entity.Bookmark">
     insert into bookmark
@@ -46,6 +47,9 @@
       <if test="dDecr != null">
         d_decr,
       </if>
+      <if test="uid != null">
+        uid,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="bId != null">
@@ -59,6 +63,9 @@
       </if>
       <if test="dDecr != null">
         #{dDecr,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        #{uid},
       </if>
     </trim>
   </insert>
@@ -74,6 +81,9 @@
       <if test="dDecr != null">
         d_decr = #{dDecr,jdbcType=VARCHAR},
       </if>
+      <if test="uid != null">
+        uid = #{uid},
+      </if>
     </set>
     where b_id = #{bId,jdbcType=BIGINT}
   </update>
@@ -81,13 +91,14 @@
     update bookmark
     set b_name = #{bName,jdbcType=VARCHAR},
       b_date = #{bDate,jdbcType=DATE},
-      d_decr = #{dDecr,jdbcType=VARCHAR}
+      d_decr = #{dDecr,jdbcType=VARCHAR},
+      uid=#{uid}
     where b_id = #{bId,jdbcType=BIGINT}
   </update>
   <select id="findBookMark" resultMap="BaseResultMap">
-    SELECT * FROM bookmark WHERE b_id IN (SELECT DISTINCT  id FROM collection WHERE u_id=1)
+    SELECT * FROM bookmark WHERE uid=#{id}
   </select>
   <insert id="addBookMark">
-    insert into bookmark values(null,#{bName},#{bDate},#{dDecr})
+    insert into bookmark values(null,#{bName},#{bDate},#{dDecr},#{uid})
   </insert>
 </mapper>
