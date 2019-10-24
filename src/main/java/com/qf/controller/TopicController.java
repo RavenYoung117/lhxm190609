@@ -55,6 +55,9 @@ public class TopicController {
     //话题分类全查:根据类型返回全部话题
     @RequestMapping("/findAllByType")
     public ResultVO findAllByType(String type){
+        if (type==null){
+            return new ResultVOUtils().error();
+        }
         List<Topic> list=topicService.findAllByType(type);
         return new ResultVOUtils<List<Topic>>().success(list);
     }
@@ -104,6 +107,9 @@ public class TopicController {
     //我的：我参与讨论的话题
     @RequestMapping("/getAnswertopics")
     public ResultVO getAnswertopics(long uid){
+        if (uid<=0){
+            return new ResultVOUtils().error();
+        }
         List<Answertopic> list=answerService.findAnswertopic(uid);
         return new ResultVOUtils<List<Answertopic>>().success(list);
     }
@@ -113,7 +119,7 @@ public class TopicController {
     public ResultVO getRecord(long uid){
         List<Record> list=topicService.findRecord(uid);
         if(list.size()==0){
-            throw new WxException("查询失败,请刷新！");
+            return new ResultVOUtils().error();
         }
         List tidList=new ArrayList();
         for (Record record : list) {

@@ -3,6 +3,7 @@ package com.qf.controller;
 import com.qf.entity.Users;
 import com.qf.service.UserService;
 import com.aliyuncs.exceptions.ClientException;
+import com.qf.util.IsEmail;
 import com.qf.util.IsPhone;
 import com.qf.util.ResultVoUtil;
 import com.qf.util.SmsDysmapi;
@@ -30,6 +31,9 @@ public class UserController {
     private UserService service;
     @RequestMapping("updateheadimg")
     public int upheadimg(Integer id, MultipartFile headimg, HttpServletRequest request){
+        if(id==null||headimg==null){
+            return 0;
+        }
         String realPath = request.getRealPath( "/headimg");
         String filename = id+headimg.getOriginalFilename();
         try {
@@ -40,49 +44,74 @@ public class UserController {
         return service.updateheadimg(id,"headimg/"+filename);
     }
     @RequestMapping("updateuname")
-    public int upheadimg(Integer id, String uname, ModelMap map){
+    public int updateuname(Integer id, String uname){
+        if(id==null||uname==null){
+            return 0;
+        }
         return service.updateuname(id,uname);
     }
     @RequestMapping("updategender")
-    public int upheadimg(Integer id,Integer gender){
+    public int updategender(Integer id,Integer gender){
+        if(id==null||gender==null){
+            return 0;
+        }
         return service.updategender(id,gender);
     }
     @RequestMapping("updatebirthday")
-    public int upheadimg(Integer id,Date birthday){
+    public int updatebirthday(Integer id,Date birthday){
+        if(id==null||birthday==null){
+            return 0;
+        }
         return service.updatebirthday(id,birthday);
     }
     @RequestMapping("updateself")
-    public int upheadimg(Integer id,String self){
+    public int updateself(Integer id,String self){
+        if(id==null||self==null){
+            return 0;
+        }
         return service.updateself(id,self);
     }
     @RequestMapping("updatepassword")
-    public int upheadimg(Integer id,String oldpass,String newpass){
+    public int updatepassword(Integer id,String oldpass,String newpass){
+        if(id==null||oldpass==null){
+            return 0;
+        }
         return service.updatepassword(id,newpass,oldpass);
     }
     @RequestMapping("reward")
     public int reward(Integer formid,Integer toid,Integer money){
+        if(formid==null||toid==null){
+            return 0;
+        }
         return service.reward(formid,toid,money);
     }
     //陈**
     @RequestMapping("/regist")
     public Map regist(String phone,String code,String password,HttpSession session, HttpServletRequest request) {
         String result =(String)session.getAttribute("result");
-
         String uname=phone;
         //String realPath = request.getRealPath("/headimg");
         String iconUrl = "headimg/img1.jpeg";
         Map map=new HashMap();
-        if (phone!=null&&result.equals(code)){
-            service.addUsers(phone,password,uname,iconUrl);
-            map.put("code",200);
-            map.put("msg","验证成功");
-            return map;//跳转页面
+        if(result.equals(code)){
+            if (phone!=null&&IsPhone.isMobileNO(phone)&&password!=null){
+                service.addUsers(phone,password,uname,iconUrl);
+                map.put("code",200);
+                map.put("msg","注册成功");
+                return map;//跳转页面
+            }else{
+                //if ()
+                map.put("code", 400);
+                map.put("msg", "注册信息错误");
+                return map;
+            }
         }else{
             //if ()
             map.put("code", 400);
             map.put("msg", "验证码错误");
             return map;
         }
+
     }
 
     //提供一个用户短信校验的方法
@@ -123,7 +152,7 @@ public class UserController {
     @RequestMapping("/login")
     public Map login(String email, String phone, String password, HttpSession session){
         Map map = new HashMap();
-        if (email!=null&&email.contains("@")){
+        if (email!=null&&IsEmail.isEmail(email)){
             Users users1=service.FindByemail(email,password);
             if (users1!=null){
                 session.setAttribute("user1",users1);
@@ -136,7 +165,7 @@ public class UserController {
                 map.put("code", 500);
                 map.put("massage", "密码错误");
             }
-        }else{
+        }else if(phone!=null&&IsPhone.isMobileNO(phone)){
             Users users2 =  service.FindByphone(phone,password);
             if (users2!=null){
                 session.setAttribute("user2",users2);
@@ -204,6 +233,9 @@ public class UserController {
     }
     @RequestMapping("/addMoney")
     public ResultVO addMoney(int userid, int money){
+        if(userid<=0||money<=0){
+            return new ResultVoUtil<>().success(null,"充值失败");
+        }
         int i = service.addMoney(userid, money);
         if(i==0){
             return new ResultVoUtil<>().success(null,"充值失败");
@@ -213,7 +245,13 @@ public class UserController {
 
     @RequestMapping("/findMoney")
     public ResultVO findMoney(int userid){
+        if(userid<=0){
+            return new ResultVoUtil<>().success(null,"查询失败");
+        }
         Users money = service.findMoney(userid);
+        if(money==null){
+            return new ResultVoUtil<>().success(null,"查询失败");
+        }
         return new ResultVoUtil<>().success(money.getMoney(),"");
     }
 }
