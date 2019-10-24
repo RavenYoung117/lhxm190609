@@ -1,6 +1,7 @@
 package com.qf.controller;
 
 import com.qf.dto.BookMarkDto;
+import com.qf.entity.Answertopic;
 import com.qf.service.AnswerService;
 import com.qf.util.ResultVoUtil;
 import com.qf.vo.ResultVO;
@@ -15,15 +16,16 @@ import java.util.List;
 public class AnswertopicController {
     @Resource
     AnswerService answertopicService;
+
     //对评论点赞
     @RequestMapping("/addAnswerLike")
     @ResponseBody
-    public ResultVO addLike(int answerId){
+    public ResultVO addLike(int answerId) {
         int i = answertopicService.addLike(answerId);
-        if(i==0){
-            return new ResultVoUtil<List<BookMarkDto>>().error(null,"点赞失败");
+        Answertopic like = answertopicService.findLike(answerId);
+        if (i == 0) {
+            return new ResultVoUtil<>().error(null, "点赞失败");
         }
-        return  new ResultVoUtil<List<BookMarkDto>>().success(null,"点赞成功");
+        return new ResultVoUtil<Long>().success(like.getLike(), "点赞成功");
     }
-
 }

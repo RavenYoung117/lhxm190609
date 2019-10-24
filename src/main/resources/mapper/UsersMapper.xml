@@ -199,4 +199,7 @@
   <select id="findUserByPhone" resultMap="BaseResultMap">
     select * from users where phone=#{phone}
   </select>
+  <select id="findMoney" resultMap="BaseResultMap">
+    select money from users where u_id=#{id}
+  </select>
 </mapper>

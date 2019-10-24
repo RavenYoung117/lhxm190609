@@ -3,6 +3,8 @@ package com.qf.service;
 
 import com.qf.entity.Collection;
 
+import java.util.List;
+
 /**
  * author：你的洪哥哥
  * date：2019-10-19 16:41
@@ -16,4 +18,6 @@ public interface CollectService {
     int insert(Collection record);
 
     int addCollection(Collection collection);
+
+    List<Collection> showcollect(int uid);
 }

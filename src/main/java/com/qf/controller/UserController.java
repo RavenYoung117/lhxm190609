@@ -69,8 +69,8 @@ public class UserController {
         String result =(String)session.getAttribute("result");
 
         String uname=phone;
-        String realPath = "/headimg";
-        String iconUrl = realPath+"/img1.jpeg";
+        String realPath = request.getRealPath("/headimg");
+        String iconUrl = "headimg"+"/img1.jpeg";
         Map map=new HashMap();
         if (phone!=null&&result.equals(code)){
             service.addUsers(phone,password,uname,iconUrl);
@@ -209,5 +209,11 @@ public class UserController {
             return new ResultVoUtil<>().success(null,"充值失败");
         }
         return new ResultVoUtil<>().success(null,"充值成功");
+    }
+
+    @RequestMapping("/findMoney")
+    public ResultVO findMoney(int userid){
+        Users money = service.findMoney(userid);
+        return new ResultVoUtil<>().success(money.getMoney(),"");
     }
 }

@@ -28,4 +28,6 @@ public interface ReplyblogMapper {
     List<Replyblog> reply(Integer blogid);
 
     public int addReplyBlogLike(int id);
+
+    Replyblog findLike(int id);
 }

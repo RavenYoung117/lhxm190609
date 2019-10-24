@@ -273,4 +273,7 @@
       select * from blog
       where u_id=#{uid}
     </select>
+  <select id="findLike" resultMap="BaseResultMap">
+    select `like` from blog where bolg_id=#{id}
+  </select>
 </mapper>

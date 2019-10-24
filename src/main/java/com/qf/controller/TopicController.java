@@ -83,8 +83,7 @@ public class TopicController {
             return new ResultVOUtils().error();
         }
         //获取uploadfile目录的真实路径
-        //String realPath = request.getRealPath("/answerImage");
-        String realPath = "/answerImage";
+        String realPath = request.getRealPath("/answerImage");
         //得到上传文件的文件名
         String filename=anImage.getOriginalFilename();
         try {
@@ -93,7 +92,7 @@ public class TopicController {
             e.printStackTrace();
         }
         //以上是上传文件到服务器的代码
-        answertopic.setAnswerimage(realPath+"/"+filename);
+        answertopic.setAnswerimage("answerImage"+filename);
         Date date = new Date();
         answertopic.setTime(date);
         int i=answerService.insertAnswer(answertopic);

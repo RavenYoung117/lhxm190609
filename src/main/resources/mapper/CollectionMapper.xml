@@ -7,9 +7,12 @@
     <result column="t_id" jdbcType="BIGINT" property="tId" />
     <result column="u_id" jdbcType="BIGINT" property="uId" />
     <result column="c_time" jdbcType="DATE" property="cTime" />
+    <association property="blog" javaType="com.qf.entity.Blog">
+      <id column="bolg_id" jdbcType="BIGINT" property="bolgId" />
+      <result column="title" jdbcType="VARCHAR" property="title" />
+      <result column="image_url" jdbcType="VARCHAR" property="imageUrl" />
+    </association>
   </resultMap>
-
-
 
   <sql id="Base_Column_List">
     c_id, id, t_id, u_id, c_time
@@ -96,4 +99,10 @@
   <insert id="addCollection">
     insert into collection VALUES (null,#{id},#{tId},#{uId},#{cTime})
   </insert>
+
+  <select id="showcollect" resultMap="BaseResultMap">
+    SELECT b.bolg_id,b.title,b.image_url,con.c_time
+    FROM collection con,blog b
+    WHERE con.u_id=#{uid} and con.t_id=b.bolg_id
+  </select>
 </mapper>

@@ -15,6 +15,16 @@ public class Collection {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date cTime;
 
+    private Blog blog;
+
+    public Blog getBlog() {
+        return blog;
+    }
+
+    public void setBlog(Blog blog) {
+        this.blog = blog;
+    }
+
     public Long getcId() {
         return cId;
     }

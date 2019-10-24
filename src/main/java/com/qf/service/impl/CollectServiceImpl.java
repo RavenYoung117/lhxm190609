@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 
 /**
  * author：你的洪哥哥
@@ -53,6 +54,12 @@ public class CollectServiceImpl implements CollectService {
     public int addCollection(Collection collection) {
         int i = collectionMapper.addCollection(collection);
         return i;
+    }
+
+    @Override
+    public List<Collection> showcollect(int uid) {
+        List<Collection> collectionList = collectionMapper.showcollect(uid);
+        return collectionList;
     }
 
 }

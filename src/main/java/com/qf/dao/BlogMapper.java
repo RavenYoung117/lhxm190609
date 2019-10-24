@@ -42,4 +42,5 @@ public interface BlogMapper {
 
     List<Blog> findByUid(Long uid);
 
+    Blog findLike(int id);
 }

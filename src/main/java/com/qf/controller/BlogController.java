@@ -39,11 +39,11 @@ public class BlogController {
 
     public ResultVO save(Blog blog, MultipartFile file, HttpServletRequest request){
         //获取photos目录的真实路径
-        String realPath ="/blogImage";
+        String realPath = request.getRealPath("/blogImage");
         //得到上传文件的文件名
         String filename = file.getOriginalFilename();
         try {
-            file.transferTo(new File(realPath+"/"+filename));
+            file.transferTo(new File("blogImage"+filename));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -92,15 +92,17 @@ public class BlogController {
 
         List<Blog> blogList = blogService.fingblog(title);
         List<Query> queryList = queryService.selectbyuid(uid);
-        if (title!=null&&uid!=null) {
-            int i=0;
-            for (Query query : queryList) {
-                if (title.equals(query.getRecord())) {
-                    i=1;
+        if(blogList.size()!=0) {
+            if (title != null && uid != null) {
+                int i = 0;
+                for (Query query : queryList) {
+                    if (title.equals(query.getRecord())) {
+                        i = 1;
+                    }
                 }
-            }
-            if (i==0) {
-                queryService.insertSelective(title,uid);
+                if (i == 0) {
+                    queryService.insertSelective(title, uid);
+                }
             }
         }
         if (blogList.size()==0){
@@ -129,11 +131,11 @@ public class BlogController {
     @RequestMapping("/addBlogLike")
     public ResultVO addBlogLike(int blogid) {
         int i = blogService.AddBlogLike(blogid);
+        Blog like = blogService.findLike(blogid);
         if(i==0){
-            return new ResultVoUtil<List<BookMarkDto>>().error(null,"点赞失败");
+            return new ResultVoUtil<>().error(null,"点赞失败");
         }
-        return new ResultVoUtil<List<BookMarkDto>>().success(null,"点赞成功");
-
+        return new ResultVoUtil<Long>().success(like.getLike(),"点赞成功");
     }
     @RequestMapping("/addBlogMoney")
     public ResultVO addBlogMoney(BlogMoneyFrom blogMoneyFrom) {
@@ -156,7 +158,6 @@ public class BlogController {
             throw new WxException("用户未登录");
         }
         List<Blog> blogList = blogService.findByUid(uId);
-
         return new ResultVOUtils<List<Blog>>().success(blogList);
     }
 }

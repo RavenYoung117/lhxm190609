@@ -134,4 +134,11 @@ public class UserServiceImp implements UserService{
     public Users findUserByPhone(String phone) {
         return dao.findUserByPhone(phone);
     }
+
+    @Override
+    public Users findMoney(int userid) {
+        Users money = dao.findMoney(userid);
+        return money;
+    }
+
 }

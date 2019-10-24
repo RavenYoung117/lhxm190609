@@ -50,6 +50,11 @@ WHERE r.blog_id=#{blogid} order by `like` desc
     from replyblog
     where r_id = #{rId,jdbcType=BIGINT}
   </select>
+  <select id="findLike" resultMap="BaseResultMap">
+    select `like` from replyblog where r_id=#{id}
+  </select>
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from replyblog
     where r_id = #{rId,jdbcType=BIGINT}

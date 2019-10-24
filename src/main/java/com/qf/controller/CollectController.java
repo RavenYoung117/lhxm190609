@@ -12,6 +12,7 @@ import com.qf.util.ResultVoUtil;
 import com.qf.vo.ResultVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -94,5 +95,14 @@ public class CollectController {
             }
         }
         return new ResultVOUtils<>().error();
+    }
+    @RequestMapping("/showcollect")
+    public ResultVO showcollect(@RequestParam(defaultValue = "-1") int uid){
+        List<Collection> collectionList = collectService.showcollect(uid);
+        if (collectionList.size()!=0) {
+            return new ResultVOUtils<List<Collection>>().success(collectionList);
+        }else {
+            return new ResultVOUtils<List<Collection>>().error();
+        }
     }
 }

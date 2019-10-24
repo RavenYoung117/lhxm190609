@@ -169,4 +169,9 @@ public class BlogServiceImpl implements BlogService {
         return byUid;
     }
 
+    @Override
+    public Blog findLike(int id) {
+        Blog like = blogMapper.findLike(id);
+        return like;
+    }
 }

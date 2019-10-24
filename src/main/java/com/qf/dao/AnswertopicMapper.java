@@ -24,4 +24,7 @@ public interface AnswertopicMapper {
     List<Answertopic> findAnswertopic(long uid);
 
     public int addLike(int id);
+
+    Answertopic findLike(int id);
+
 }

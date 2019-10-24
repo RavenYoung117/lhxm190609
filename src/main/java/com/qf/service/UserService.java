@@ -25,5 +25,7 @@ public interface UserService {
     public int addMoney(int userid, int money);
 
     Users findUserByPhone(String phone);
+
+    Users findMoney(int userid);
 }
 

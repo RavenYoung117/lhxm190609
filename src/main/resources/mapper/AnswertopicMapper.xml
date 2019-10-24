@@ -25,12 +25,6 @@
     where a.u_id=u.u_id and t_id=#{tid}
   </select>
 
-  <select id="findByuId" resultType="Long">
-    select t_id
-    from answertopic
-    where u_id=#{uid}
-  </select>
-
   <select id="findAnswertopic" resultMap="BaseResultMap">
     select * from answertopic
     where u_id=#{uid}
@@ -140,4 +134,14 @@
   <update id="addLike">
     UPDATE answertopic SET `like`=`like`+1 WHERE answer_id=#{id}
   </update>
+
+  <select id="findLike" resultMap="BaseResultMap">
+  select `like` from answertopic where answer_id=#{id}
+  </select>
+  <select id="findByuId" resultType="java.lang.Long">
+    select t_id
+    from answertopic
+    where u_id=#{uid}
+  </select>
+
 </mapper>

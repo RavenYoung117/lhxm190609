@@ -46,4 +46,7 @@ public interface UsersMapper {
     public int deMoney(Map map);
 
     Users findUserByPhone(@Param(value = "phone") String phone);
+
+    Users findMoney(int userid);
+
 }
