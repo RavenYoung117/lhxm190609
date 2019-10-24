@@ -26,7 +26,7 @@ public interface BlogService {
 
     List<Blog> findAll(String title);
 
-    Blog findByIdAndState(Long bolgId, Long bolgstate);
+    Blog findByIdAndState(Long bolgId);
 
     //根据文章id查评论
     List<Replyblog> findList(Long blogId);
@@ -48,7 +48,7 @@ public interface BlogService {
 
     public int addBlogMoney(BlogMoneyFrom blogMoneyFrom);
 
-    List<Blog> findByUid(Long uid);
+    List<Blog> findByUid(Long uid,Long blogState);
 
     Blog findLike(int blogid);
 }

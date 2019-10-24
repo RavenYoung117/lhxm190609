@@ -63,7 +63,7 @@
   <select id="findByIdAndState" resultType="com.qf.entity.Blog">
     select b.u_id,b.image_url,b.content,b.cimage,b.collect,b.like
     from blog b,users u
-    where b.bolg_id=u.u_id and bolg_id=#{bolgId} and bolgstate=#{bolgstate}
+    where b.bolg_id=u.u_id and bolg_id=#{bolgId}
   </select>
 
 
@@ -271,7 +271,7 @@
 
   <select id="findByUid" resultType="com.qf.entity.Blog">
       select * from blog
-      where u_id=#{uid}
+      where u_id=#{uid} and bolgstate=#{bolgState}
     </select>
   <select id="findLike" resultMap="BaseResultMap">
     select `like` from blog where bolg_id=#{id}

@@ -69,14 +69,12 @@ public class BlogController {
     }
 
     @RequestMapping("/findbybid")
-    public ResultVO findBlog(long bolgId,Long blogstate){
+    public ResultVO findBlog(long bolgId){
         if (bolgId<=0){
             throw new WxException("没有该发布信息");
         }
-        if (blogstate==null){
-            throw new WxException("没有该发布信息");
-        }
-        Blog blog = blogService.findByIdAndState(bolgId, blogstate);
+
+        Blog blog = blogService.findByIdAndState(bolgId);
         List<Replyblog> replyblogList = blogService.findList(bolgId);
         Map map = new HashMap();
         map.put("blog", blog);
@@ -163,11 +161,11 @@ public class BlogController {
 
     @RequestMapping("findbyuid")
     @ResponseBody
-    public ResultVO<List<Blog>> findUid(Long uId){
+    public ResultVO<List<Blog>> findUid(Long uId,Long blogState){
         if (uId<=0){
             throw new WxException("用户未登录");
         }
-        List<Blog> blogList = blogService.findByUid(uId);
+        List<Blog> blogList = blogService.findByUid(uId,blogState);
         return new ResultVOUtils<List<Blog>>().success(blogList);
     }
 }

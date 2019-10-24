@@ -41,10 +41,9 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public Blog findByIdAndState(Long bolgId, Long bolgstate) {
+    public Blog findByIdAndState(Long bolgId) {
         Map map = new HashMap();
         map.put("bolgId", bolgId);
-        map.put("bolgstate", bolgstate);
         Blog blog = blogMapper.findByIdAndState(map);
         return blog;
     }
@@ -164,8 +163,11 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public List<Blog> findByUid(Long uid) {
-        List<Blog> byUid = blogMapper.findByUid(uid);
+    public List<Blog> findByUid(Long uid,Long blogState) {
+        Map map=new HashMap();
+        map.put("uid",uid);
+        map.put("blogState",blogState);
+        List<Blog> byUid = blogMapper.findByUid(map);
         return byUid;
     }
 

@@ -40,7 +40,7 @@ public interface BlogMapper {
 
     public Blog findOne(int id);
 
-    List<Blog> findByUid(Long uid);
+    List<Blog> findByUid(Map map);
 
     Blog findLike(int id);
 }
