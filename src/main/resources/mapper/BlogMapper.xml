@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qf.dao.BlogMapper">
-  <resultMap id="BaseResultMap" type="com.qf.entity.Blog">
+  <!--<resultMap id="BaseResultMap" type="com.qf.entity.Blog">
     <id column="bolg_id" jdbcType="BIGINT" property="bolgId" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="image_url" jdbcType="VARCHAR" property="imageUrl" />
@@ -15,7 +15,7 @@
     <result column="bolgstate" jdbcType="BIGINT" property="bolgstate" />
     <result column="t_id" jdbcType="BIGINT" property="tId" />
     <result column="u_id" jdbcType="BIGINT" property="uId" />
-  </resultMap>
+  </resultMap>-->
   <resultMap id="BaseResultMap1" type="com.qf.entity.Blog">
     <id column="bolg_id" jdbcType="BIGINT" property="bolgId" />
     <result column="title" jdbcType="VARCHAR" property="title" />
@@ -54,14 +54,14 @@
       and b.title=#{title}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap1">
     select 
     <include refid="Base_Column_List" />
     from blog
     where bolg_id = #{bolgId,jdbcType=BIGINT}
   </select>
-  <select id="findByIdAndState" resultType="com.qf.entity.Blog">
-    select b.u_id,b.image_url,b.content,b.cimage,b.collect,b.like
+  <select id="findByIdAndState" resultMap="BaseResultMap1">
+    select *
     from blog b,users u
     where b.bolg_id=u.u_id and bolg_id=#{bolgId}
   </select>
@@ -94,8 +94,8 @@
   <select id="findblog" resultMap="BaseResultMap1">
     SELECT b.bolg_id,b.title,b.image_url,b.cimage,
     b.collect,b.bolgstate,u.uname,u.icon_url
-    FROM blog b JOIN users u ON b.u_id=u.u_id
-    WHERE  1=1
+    FROM blog b,users u
+    WHERE  b.u_id=u.u_id
     <if test="title!=null">
       and title like '%${title}%'
     </if>
@@ -104,7 +104,7 @@
   <update id="AddBlogLike">
     UPDATE blog SET `like`=`like`+1 WHERE bolg_id=#{id}
   </update>
-  <select id="findOne" resultMap="BaseResultMap">
+  <select id="findOne" resultMap="BaseResultMap1">
     select u_id from blog where bolg_id=#{id}
   </select>
 
@@ -269,11 +269,11 @@
     where bolg_id = #{bolgId,jdbcType=BIGINT}
   </update>
 
-  <select id="findByUid" resultType="com.qf.entity.Blog">
+  <select id="findByUid" resultMap="BaseResultMap1">
       select * from blog
-      where u_id=#{uid} and bolgstate=#{bolgState}
+      where u_id=#{uid} and bolgstate=#{blogState}
     </select>
-  <select id="findLike" resultMap="BaseResultMap">
+  <select id="findLike" resultMap="BaseResultMap1">
     select `like` from blog where bolg_id=#{id}
   </select>
 </mapper>

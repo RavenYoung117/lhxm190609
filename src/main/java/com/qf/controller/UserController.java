@@ -89,10 +89,15 @@ public class UserController {
     @RequestMapping("/regist")
     public Map regist(String phone,String code,String password,HttpSession session, HttpServletRequest request) {
         String result =(String)session.getAttribute("result");
+        Map map=new HashMap();
+        if(result==null){
+            map.put("code", 400);
+            map.put("msg", "请发送验证码");
+            return map;
+        }
         String uname=phone;
         //String realPath = request.getRealPath("/headimg");
         String iconUrl = "headimg/img1.jpeg";
-        Map map=new HashMap();
         if(result.equals(code)){
             if (phone!=null&&IsPhone.isMobileNO(phone)&&password!=null){
                 service.addUsers(phone,password,uname,iconUrl);
@@ -214,22 +219,29 @@ public class UserController {
     public Map update(String phone,String password,String code,HttpSession session){
         Map map = new HashMap();
         String result = (String) session.getAttribute("result");
+        if(result==null){
+            map.put("code", 400);
+            map.put("msg", "请发送验证码");
+            return map;
+        }
         if(result.equals(code)){
             if (phone!=null){
                 service.updatephone(phone,password);
                 map.put("msg","您的手机号码修改成功");
                 map.put("code",200);
                 map.put("data","sdsd");
+                return map;
             }else {
                 map.put("code", 400);
                 map.put("msg", "您的手机号码修改失败");
+                return map;
             }
 
         }else{
             map.put("code", 401);
             map.put("msg", "您输入的验证码错误");
+            return map;
         }
-        return map;
     }
     @RequestMapping("/addMoney")
     public ResultVO addMoney(int userid, int money){
