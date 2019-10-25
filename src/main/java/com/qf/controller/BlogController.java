@@ -38,24 +38,29 @@ public class BlogController {
     @RequestMapping("/addblog")
 
     public ResultVO save(Blog blog, MultipartFile file, HttpServletRequest request){
-        //获取photos目录的真实路径
-        String realPath = request.getRealPath("/blogImage");
-        //得到上传文件的文件名
-        String filename = file.getOriginalFilename();
-        try {
-            file.transferTo(new File(realPath+"/"+filename));
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (blog==null){
+            return new ResultVOUtils<Blog>().error();
         }
-        blog.setImageUrl("blogImage/"+filename);
-        blog.setCimage(filename);
+        if(file!=null){
+
+            //获取photos目录的真实路径
+            String realPath = request.getRealPath("/blogImage");
+            //得到上传文件的文件名
+            String filename = file.getOriginalFilename();
+            try {
+                file.transferTo(new File(realPath+"/"+filename));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            blog.setImageUrl("blogImage/"+filename);
+            blog.setCimage(filename);
+        }
         blog.setPubDate(new Date());
         blog.setEditDate(new Date());
         int count = blogService.insertSelective(blog);
         if (count>0){
           return new ResultVOUtils<Blog>().success(null);
         }
-
         return new ResultVOUtils<Blog>().error();
     }
 

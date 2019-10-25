@@ -31,6 +31,9 @@ public class ReplybolgController {
 
     @RequestMapping("/reply")
     public ResultVO reply(Integer blogid){
+        if(blogid==null){
+            return new ResultVOUtils<List<Replyblog>>().error();
+        }
         List<Replyblog> reply = replybolgService.reply(blogid);
         return new ResultVOUtils<List<Replyblog>>().success(reply);
     }

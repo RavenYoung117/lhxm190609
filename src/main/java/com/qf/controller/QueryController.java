@@ -28,6 +28,9 @@ public class QueryController {
             return null;
         }
         List<Query> queryList = queryService.selectbyuid(uid);
+        if (queryList.size()==0){
+            return new ResultVOUtils<List<Query>>().error();
+        }
         return new ResultVOUtils<List<Query>>().success(queryList);
     }
 }

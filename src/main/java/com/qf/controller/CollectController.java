@@ -38,7 +38,10 @@ public class CollectController {
     BookmarkService bookMarkService;
     //根据用户id查询该用户有哪些文件夹
     @RequestMapping("/chooseBookMark")
-    public ResultVO<List<BookMarkDto>> addCollection(int uid){
+    public ResultVO<List<BookMarkDto>> addCollection(@RequestParam(defaultValue = "-1")int uid){
+        if (uid==-1) {
+            return new ResultVoUtil<List<BookMarkDto>>().error(null,"用户ID为空");
+        }
         List<BookMarkDto> bookMark =bookMarkService.findBookMark(uid);
         return new ResultVoUtil<List<BookMarkDto>>().success(bookMark,"");
     }
@@ -49,6 +52,9 @@ public class CollectController {
 //用户新建收藏夹
     @RequestMapping("addBookMark")
     public ResultVO  addBookMark(String name,String derc){
+        if (name==null) {
+            return new ResultVoUtil<List<BookMarkDto>>().error(null,"收藏夹名为空");
+        }
         Bookmark bookMark=new Bookmark();
         bookMark.setbName(name);
         bookMark.setbDate(new Date());
@@ -64,6 +70,9 @@ public class CollectController {
     //用户添加收藏
     @RequestMapping("addCollection")
     public ResultVO addCollection(CollectionForm collectionForm){
+        if (collectionForm==null){
+            return new ResultVoUtil<List<BookMarkDto>>().error(null,"收藏信信息为空");
+        }
         Collection collection=new Collection();
         BeanUtils.copyProperties(collectionForm,collection);
         collection.setcTime(new Date());
@@ -74,7 +83,9 @@ public class CollectController {
         return new ResultVoUtil<List<BookMarkDto>>().success(null,"收藏成功");
     }
     @RequestMapping("/addcollect")
-    public ResultVO addcollect(long blogid, long uid, int bookid){
+    public ResultVO addcollect(@RequestParam(defaultValue = "-1")long blogid,
+                               @RequestParam(defaultValue = "-1")long uid,
+                               @RequestParam(defaultValue = "-1")int bookid){
         int i = collectService.insertSelective(blogid, uid, bookid);
         if (i==1) {
             int addcollect = blogService.addcollect(blogid);
@@ -86,7 +97,8 @@ public class CollectController {
     }
 
     @RequestMapping("/deletecollect")
-    public ResultVO deletecollect(long blogid,long cid){
+    public ResultVO deletecollect(@RequestParam(defaultValue = "-1")long blogid,
+                                  @RequestParam(defaultValue = "-1")long cid){
         int i = collectService.deleteByPrimaryKey(cid);
         if (i==1) {
             int addcollect = blogService.deletecollect(blogid);

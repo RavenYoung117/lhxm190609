@@ -8,6 +8,7 @@ import com.qf.util.IsPhone;
 import com.qf.util.ResultVoUtil;
 import com.qf.util.SmsDysmapi;
 import com.qf.vo.ResultVO;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -58,7 +59,7 @@ public class UserController {
         return service.updategender(id,gender);
     }
     @RequestMapping("updatebirthday")
-    public int updatebirthday(Integer id,Date birthday){
+    public int updatebirthday(Integer id,@DateTimeFormat(pattern = "yyyy-MM-dd") Date birthday){
         if(id==null||birthday==null){
             return 0;
         }
