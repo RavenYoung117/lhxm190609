@@ -115,10 +115,10 @@ public class UserServiceImp implements UserService{
     }
 
     @Override
-    public int updatephone(String phone, String password) {
+    public int updatephone(String phone, Long uid) {
         Map map = new HashMap();
         map.put("phone",phone);
-        map.put("password",password);
+        map.put("uid",uid);
         return   dao.updateByphone(map);
     }
     @Override

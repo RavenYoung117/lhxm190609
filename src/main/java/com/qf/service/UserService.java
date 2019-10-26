@@ -20,7 +20,7 @@ public interface UserService {
 
     int addUsers(String phone, String password, String uname, String iconUrl);//注册
 
-    int updatephone(String phone, String password);//修改手机号
+    int updatephone(String phone, Long uid);//修改手机号
 
     public int addMoney(int userid, int money);
 

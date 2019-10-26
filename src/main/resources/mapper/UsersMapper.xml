@@ -186,7 +186,7 @@
   </insert>
 
   <update id="updateByphone">
-    update users set phone=#{phone}
+    update users set phone=#{phone} where u_id=#{uid}
   </update>
 
   <update id="addMoney">

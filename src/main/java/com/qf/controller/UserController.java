@@ -217,7 +217,7 @@ public class UserController {
         return map;
     }
     @RequestMapping("/update")
-    public Map update(String phone,String password,String code,HttpSession session){
+    public Map update(String phone,Long uid,String code,HttpSession session){
         Map map = new HashMap();
         String result = (String) session.getAttribute("result");
         if(result==null){
@@ -226,8 +226,8 @@ public class UserController {
             return map;
         }
         if(result.equals(code)){
-            if (phone!=null){
-                service.updatephone(phone,password);
+            if (phone!=null&&uid!=null){
+                service.updatephone(phone,uid);
                 map.put("msg","您的手机号码修改成功");
                 map.put("code",200);
                 map.put("data","sdsd");
