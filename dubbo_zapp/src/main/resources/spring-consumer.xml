@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://code.alibabatech.com/schema/dubbo
+                           http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!--dubbo+spring 调用服务 消费者的配置-->
+
+    <!--1.消费者的应用名-->
+    <dubbo:application name="dubbo-zapp"></dubbo:application>
+    <!--2.注册中心-->
+    <dubbo:registry address="zookeeper://192.168.32.66:2181"></dubbo:registry>
+    <!--3.指定要调用的服务-->
+    <!--
+                timeout="9000" : 超时时间
+                retries="2"  :重试次数
+        -->
+    <dubbo:reference interface="com.qf.service.AnswerService" id="answerService" timeout="9000" retries="2"></dubbo:reference>
+    <dubbo:reference interface="com.qf.service.BlogService" id="blogService" timeout="9000" retries="2"></dubbo:reference>
+    <dubbo:reference interface="com.qf.service.BookmarkService" id="bookmarkService" timeout="9000" retries="2"></dubbo:reference>
+    <dubbo:reference interface="com.qf.service.CollectService" id="collectService" timeout="9000" retries="2"></dubbo:reference>
+    <dubbo:reference interface="com.qf.service.QueryService" id="queryService" timeout="9000" retries="2"></dubbo:reference>
+    <dubbo:reference interface="com.qf.service.ReplybolgService" id="replybolgService" timeout="9000" retries="2"></dubbo:reference>
+    <dubbo:reference interface="com.qf.service.TopicService" id="topicService" timeout="9000" retries="2"></dubbo:reference>
+    <dubbo:reference interface="com.qf.service.UserService" id="userService" timeout="9000" retries="2"></dubbo:reference>
+
+</beans>

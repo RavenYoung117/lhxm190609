@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+        ">
+
+
+        <!--
+            dubbo发布服务
+             一般都是把service层当成服务发布
+        -->
+
+        <!--1.指定提供者的应用名称-->
+        <dubbo:application name="lhxm190609-dubbo-service"></dubbo:application>
+
+        <!--2.dubbo注册中心地址
+            zookeeper
+        -->
+        <dubbo:registry address="zookeeper://192.168.32.66:2181"></dubbo:registry>
+
+        <!--3.dubbo暴露服务的端口 -->
+        <dubbo:protocol name="dubbo" port="20880"></dubbo:protocol>
+
+        <!--4.发布服务-->
+        <dubbo:service interface="com.qf.service.AnswerService" ref="answerServiceImpl"></dubbo:service>
+        <dubbo:service interface="com.qf.service.BlogService"  ref="blogServiceImpl"  ></dubbo:service>
+        <dubbo:service interface="com.qf.service.BookmarkService"  ref="bookmarkServiceImpl"  ></dubbo:service>
+        <dubbo:service interface="com.qf.service.CollectService"  ref="collectServiceImpl"  ></dubbo:service>
+        <dubbo:service interface="com.qf.service.QueryService"  ref="queryServiceImpl"  ></dubbo:service>
+        <dubbo:service interface="com.qf.service.ReplybolgService"  ref="replyServiceImpl"  ></dubbo:service>
+        <dubbo:service interface="com.qf.service.TopicService"  ref="topicServiceImpl"  ></dubbo:service>
+        <dubbo:service interface="com.qf.service.UserService"  ref="userServiceImp"  ></dubbo:service>
+
+</beans>        
